@@ -66,36 +66,41 @@ export default function Header({ lang, siteName, labels, items }: HeaderProps) {
     pathname === href(lang, slug) || pathname.startsWith(`${href(lang, slug)}/`);
 
   return (
+    // The header's lower edge is itself a headstroke: everything on the page
+    // hangs from it, which is why the rule appears once the page has moved.
     <header
-      className={`sticky top-0 z-50 border-b bg-paper/95 backdrop-blur transition-shadow ${
-        scrolled ? "border-line shadow-card" : "border-transparent"
+      className={`sticky top-0 z-50 border-b-2 bg-paper/95 backdrop-blur transition-colors duration-300 ${
+        scrolled ? "border-brass shadow-header" : "border-transparent"
       }`}
     >
-      <div className="container-page flex h-[72px] items-center justify-between gap-6">
+      <div className="container-page flex h-[76px] items-center justify-between gap-6">
         <Link href={href(lang)} aria-label={siteName} className="shrink-0">
           <Logo lang={lang} />
         </Link>
 
-        <nav aria-label={labels.nav} className="hidden items-center gap-1 lg:flex">
-          {primary.map((item) => (
-            <Link
-              key={item.slug}
-              href={href(lang, item.slug)}
-              aria-current={isActive(item.slug) ? "page" : undefined}
-              className={`rounded px-3 py-2 text-body-sm transition-colors ${
-                isActive(item.slug) ? "text-brand" : "text-body hover:text-ink"
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <nav aria-label={labels.nav} className="hidden items-center gap-7 lg:flex">
+          {primary.map((item) => {
+            const active = isActive(item.slug);
+            return (
+              <Link
+                key={item.slug}
+                href={href(lang, item.slug)}
+                aria-current={active ? "page" : undefined}
+                className={`hang-link py-1 text-body-sm transition-colors ${
+                  active ? "text-ink before:w-full" : "text-body hover:text-ink"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-3">
           <LanguageSwitcher current={lang} label={labels.language} className="hidden sm:inline-flex" />
           <Link
             href={href(lang, "contact")}
-            className="hidden rounded-full bg-ink px-5 py-2.5 text-body-sm font-medium text-paper transition-colors hover:bg-brand md:inline-flex"
+            className="hidden bg-ink px-5 py-3 text-body-sm font-medium text-paper transition-colors hover:bg-brand md:inline-flex"
           >
             {labels.contact}
           </Link>
@@ -105,7 +110,7 @@ export default function Header({ lang, siteName, labels, items }: HeaderProps) {
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? labels.close : labels.menu}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line text-ink lg:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center border-2 border-brass text-ink transition-colors hover:bg-brass-wash lg:hidden"
           >
             <span className="relative block h-4 w-5" aria-hidden="true">
               <span
@@ -129,25 +134,28 @@ export default function Header({ lang, siteName, labels, items }: HeaderProps) {
       </div>
 
       {open && (
-        <div id="mobile-nav" className="border-t border-line bg-paper lg:hidden">
-          <nav aria-label={labels.nav} className="container-page flex flex-col py-4">
-            {items.map((item) => (
-              <Link
-                key={item.slug}
-                href={href(lang, item.slug)}
-                onClick={closeMenu}
-                aria-current={isActive(item.slug) ? "page" : undefined}
-                className={`border-b border-line py-3.5 text-body-md ${
-                  isActive(item.slug) ? "text-brand" : "text-ink"
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
+        <div id="mobile-nav" className="bg-paper lg:hidden">
+          <nav aria-label={labels.nav} className="container-page flex flex-col pb-6 pt-2">
+            {items.map((item) => {
+              const active = isActive(item.slug);
+              return (
+                <Link
+                  key={item.slug}
+                  href={href(lang, item.slug)}
+                  onClick={closeMenu}
+                  aria-current={active ? "page" : undefined}
+                  className={`border-t-2 py-4 text-body-md transition-colors ${
+                    active ? "border-brand text-brand" : "border-line text-ink hover:border-brass"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
             <Link
               href={href(lang, "contact")}
               onClick={closeMenu}
-              className="mt-5 rounded-full bg-ink px-5 py-3 text-center text-body-sm font-medium text-paper"
+              className="mt-6 bg-ink px-5 py-3.5 text-center text-body-sm font-medium text-paper"
             >
               {labels.contact}
             </Link>

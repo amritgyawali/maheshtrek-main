@@ -46,11 +46,11 @@ export default async function ContactPageRoute({ params }: { params: Promise<{ l
         homeLabel={dict.siteName}
       />
 
-      <Band tone="paper">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+      <Band tone="raised">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
           <div>
             <ContactDetails lang={lang} contact={contact} />
-            <p className="mt-8 max-w-prose text-body-sm text-body">{contact.note}</p>
+            <p className="mt-8 max-w-prose text-body-sm text-content-faint">{contact.note}</p>
           </div>
           <ContactForm contact={contact} />
         </div>

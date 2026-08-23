@@ -3,28 +3,24 @@ import type { Bullet } from "@/content/types";
 
 interface BulletsProps {
   items: Bullet[];
-  tone?: "paper" | "ink";
   className?: string;
 }
 
-/** Small numbered capability grid used on section pages. */
-export default function Bullets({ items, tone = "paper", className = "" }: BulletsProps) {
-  const invert = tone === "ink";
-
+/**
+ * Capability grid, rendered as small bento cells. No counters: these are a set
+ * of things the house does, not a sequence, and a number would claim an order
+ * the content does not have.
+ */
+export default function Bullets({ items, className = "" }: BulletsProps) {
   return (
-    <ul className={`grid gap-px overflow-hidden rounded-xl border sm:grid-cols-2 ${
-      invert ? "border-line-dark bg-line-dark" : "border-line bg-line"
-    } ${className}`}>
+    <ul className={`grid gap-4 sm:grid-cols-2 ${className}`}>
       {items.map((item, index) => (
-        <li key={item.title} className={invert ? "bg-ink-soft" : "bg-paper"}>
-          <Reveal delay={index * 60} className="h-full p-6 md:p-8">
-            <p className={`text-overline ${invert ? "text-body-invert" : "text-body"}`}>
-              {String(index + 1).padStart(2, "0")}
-            </p>
-            <h3 className={`mt-3 font-display text-title-sm ${invert ? "text-paper" : "text-ink"}`}>
-              {item.title}
-            </h3>
-            <p className={`mt-2 text-body-sm ${invert ? "text-body-invert" : "text-body"}`}>{item.text}</p>
+        <li key={item.title}>
+          <Reveal delay={index * 70} className="h-full">
+            <div className="panel panel-lip h-full p-6 md:p-7">
+              <h3 className="font-display text-title-sm text-content">{item.title}</h3>
+              <p className="mt-2.5 text-body-sm text-content-dim">{item.text}</p>
+            </div>
           </Reveal>
         </li>
       ))}

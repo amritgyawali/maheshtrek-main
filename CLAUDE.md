@@ -140,7 +140,75 @@ changes.
 
 ---
 
-## 7. Code conventions
+## 7. Design language — dark broadcast console
+
+The site is **dark only**. There is no light theme and no `prefers-color-scheme`
+branch; `color-scheme: dark` is set on the root and `themeColor` is the canvas.
+Do not add a light variant without redoing the token layer.
+
+The canvas is near-black and lit from behind: radial `Glow` sources sit under
+glass panels, so surfaces pick colour up from the light rather than from a
+border drawn on top of them. Content is laid out as a **bento grid** — tiles of
+different spans in one grid — which is what gives the pages density, because the
+client has supplied no photography and none is faked.
+
+**Surfaces.** Everything raised is a `.panel` (see `globals.css`): a
+`bg-panel-raised/90` base, a top-lit white gradient, an `11%` white hairline and
+a blur. `.panel-interactive` adds the hover lift used by linked tiles.
+`.panel-lip` adds the highlight along the top edge. Do not invent a fourth
+surface treatment — extend these.
+
+**Colour, and the contrast rule that constrains it.** Small text on a
+translucent panel is measured against the panel *composited over the canvas*,
+not against the canvas, and that costs about 1.5:1. Two tokens exist only
+because of it:
+
+| token | value | rule |
+| --- | --- | --- |
+| `accent` | `#FF3B4F` | fills, glows, large text. Filled controls put `text-canvas` on top — white on this red is 3.4:1. |
+| `accent-text` | `#FF6B7B` | **any red text under 24px.** `accent` on a panel is 3.8:1 and fails. |
+| `content` / `content-dim` / `content-faint` | `#F2F5F9` / `#9AA5B4` / `#949FAE` | `content-faint` is already at the floor — do not darken it. |
+| `iris` | `#7A6BFF` | gradients and glows only, never body text. |
+| `mint` | `#2FE3A6` | live/status indicators only. |
+
+Every string on the site currently clears WCAG AA under a composite-aware
+check. Re-run one after changing any colour.
+
+Type, in `src/lib/fonts.ts`, is chosen Devanagari-first — Nepali is the default
+locale, so no face is used that cannot set it:
+
+| role | face | why |
+| --- | --- | --- |
+| `font-display` | Anek Devanagari 500/600/700 | contemporary Indic superfamily with a matching Latin |
+| `font-sans` | Mukta 400/500/600 | body in **both** scripts, so the two trees read as one publication |
+| `font-mono` | JetBrains Mono 400/500 | labels, counters, phone numbers, VAT; Latin only, falls through to Mukta |
+
+Two things Devanagari needs that Latin does not, both handled in `globals.css`
+— do not undo them: running Nepali text gets `line-height: 1.9` and Nepali
+headings `1.32`, because vowel marks sit above the headstroke and conjuncts
+below it; and `.label` tracking relaxes to `0.03em` for `[lang="ne"]`, because
+Latin-sized letterspacing visually breaks Devanagari conjuncts apart.
+
+**No counters.** `01 / 02 / 03` markers are deliberately absent: the services
+and the parts of a service page are sets, not sequences. Add numbering back only
+for content that genuinely is ordered.
+
+**Motion.** The hero runs one staggered load sequence (`.hangs` + a per-element
+`animationDelay`). `.hangs` must use the `animate-rise` **utility** — naming the
+keyframes by hand in raw CSS silently does nothing, because Tailwind only emits
+`@keyframes` for animations whose utility class appears in the build, and the
+elements then stay at `opacity: 0` forever. The only looping motion is the
+`SignalMeter` on the home feature tile and the status dots; all of it freezes
+under `prefers-reduced-motion`.
+
+**`Reveal` must never be able to hide content.** It starts at `opacity: 0`, so
+it carries a 1.6s failsafe that shows the element whatever the
+IntersectionObserver does, and `layout.tsx` ships a `<noscript>` rule that
+un-hides every reveal. Keep both if you touch that component.
+
+---
+
+## 8. Code conventions
 
 - Server components by default. `"use client"` only where it is genuinely
   needed: `Header` (menu state), `LanguageSwitcher` (`usePathname`),
@@ -156,7 +224,7 @@ changes.
 
 ---
 
-## 8. What this repo used to be
+## 9. What this repo used to be
 
 It was scaffolded from an unrelated "Mahesh Trek" site. Leftovers that are not
 part of this project and can be deleted whenever the client confirms:

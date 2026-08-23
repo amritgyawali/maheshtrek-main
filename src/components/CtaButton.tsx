@@ -4,10 +4,14 @@ import type { Cta } from "@/content/types";
 
 type Variant = "solid" | "outline" | "ghost";
 
+/**
+ * Filled controls put the canvas colour on top of the accent — white on this
+ * red only reaches 3.4:1, dark on it reaches 5.8:1.
+ */
 const variantClass: Record<Variant, string> = {
-  solid: "bg-brand text-paper hover:bg-brand-dark",
-  outline: "border border-line text-ink hover:border-ink",
-  ghost: "border border-line-dark text-paper hover:border-paper",
+  solid: "bg-accent text-canvas hover:bg-[#FF5566] hover:shadow-glow-accent",
+  outline: "border border-white/[0.14] bg-white/[0.04] text-content hover:border-white/30 hover:bg-white/[0.08]",
+  ghost: "text-content-dim hover:text-content",
 };
 
 interface CtaButtonProps {
@@ -23,10 +27,9 @@ export default function CtaButton({ lang, cta, variant = "solid", className = ""
       lang={lang}
       to={cta.href}
       external={cta.external}
-      className={`inline-flex items-center gap-2 rounded-full px-6 py-3 text-body-sm font-medium transition-colors ${variantClass[variant]} ${className}`}
+      className={`inline-flex items-center justify-center rounded-full px-7 py-3.5 text-body-sm font-medium transition-all duration-300 ${variantClass[variant]} ${className}`}
     >
       {cta.label}
-      <span aria-hidden="true">{cta.external ? "↗" : "→"}</span>
     </SiteLink>
   );
 }

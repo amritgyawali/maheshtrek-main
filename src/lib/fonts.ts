@@ -1,30 +1,34 @@
-import { Inter, Mukta, Sora } from "next/font/google";
+import { Anek_Devanagari, JetBrains_Mono, Mukta } from "next/font/google";
 
 /**
- * Self-hosted via `next/font` rather than a `<link>` to fonts.googleapis.com:
- * no render-blocking external stylesheet, no third-party request on first
- * paint, and the CSS variables below are what `tailwind.config.ts` resolves
- * `font-sans` / `font-display` / `font-nepali` to.
+ * Three faces, all Devanagari-capable or deliberately falling back to one that
+ * is. Nepali is the default locale, so no face is chosen that cannot set it.
  */
-export const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-inter",
+
+/** Display. Contemporary Indic superfamily — tight, geometric, and drawn with
+ *  a matching Latin, so headlines look like one design in both locales. */
+export const anek = Anek_Devanagari({
+  subsets: ["devanagari", "latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-anek",
   display: "swap",
 });
 
-export const sora = Sora({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  variable: "--font-sora",
-  display: "swap",
-});
-
+/** Body, both scripts. */
 export const mukta = Mukta({
   subsets: ["devanagari", "latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   variable: "--font-mukta",
   display: "swap",
 });
 
-export const fontVariables = `${inter.variable} ${sora.variable} ${mukta.variable}`;
+/** Utility: labels, counters, phone numbers, VAT, status readouts. Latin only
+ *  — Devanagari falls through to Mukta, which is the intended behaviour. */
+export const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-jetbrains",
+  display: "swap",
+});
+
+export const fontVariables = `${anek.variable} ${mukta.variable} ${mono.variable}`;

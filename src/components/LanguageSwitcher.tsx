@@ -15,6 +15,10 @@ interface LanguageSwitcherProps {
  * Segment-swapping switcher: it keeps the reader on the same page instead of
  * dropping them on the localised home page, which is why it needs the live
  * pathname and therefore the client boundary.
+ *
+ * Rendered as two plain links marked by the same rule-above device the rest of
+ * the navigation uses — a bordered toggle would be the only chip-shaped object
+ * on the page.
  */
 export default function LanguageSwitcher({
   current,
@@ -26,33 +30,31 @@ export default function LanguageSwitcher({
   const isLight = variant === "light";
 
   return (
-    <div
-      role="group"
-      aria-label={label}
-      className={`inline-flex items-center rounded-full border p-0.5 ${
-        isLight ? "border-line-dark bg-ink-soft" : "border-line bg-mist"
-      } ${className}`}
-    >
-      {locales.map((locale) => {
+    <div role="group" aria-label={label} className={`inline-flex items-center gap-3 ${className}`}>
+      {locales.map((locale, index) => {
         const active = locale === current;
         return (
-          <Link
-            key={locale}
-            href={swapLocale(pathname, locale)}
-            hrefLang={locale}
-            aria-current={active ? "true" : undefined}
-            className={`rounded-full px-3 py-1 text-caption transition-colors ${
-              locale === "ne" ? "font-nepali" : ""
-            } ${
-              active
-                ? "bg-brand text-paper"
-                : isLight
-                  ? "text-body-invert hover:text-paper"
-                  : "text-body hover:text-ink"
-            }`}
-          >
-            {localeLabel[locale]}
-          </Link>
+          <span key={locale} className="inline-flex items-center gap-3">
+            {index > 0 && (
+              <span aria-hidden="true" className="text-brass">
+                /
+              </span>
+            )}
+            <Link
+              href={swapLocale(pathname, locale)}
+              hrefLang={locale}
+              aria-current={active ? "true" : undefined}
+              className={`hang-link py-1 text-caption transition-colors ${
+                active
+                  ? `before:w-full ${isLight ? "text-paper" : "text-ink"}`
+                  : isLight
+                    ? "text-body-invert hover:text-paper"
+                    : "text-body hover:text-ink"
+              }`}
+            >
+              {localeLabel[locale]}
+            </Link>
+          </span>
         );
       })}
     </div>

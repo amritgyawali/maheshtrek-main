@@ -4,9 +4,8 @@ export const size = { width: 32, height: 32 };
 export const contentType = "image/png";
 
 /**
- * Favicon. Built from plain boxes and text rather than an inline SVG mark:
- * the renderer only ships a Latin font, so shapes and "N" are safe while
- * Devanagari would fall back to blanks.
+ * Favicon. Boxes and arcs rather than text: the renderer ships only a Latin
+ * font, so a script-neutral mark is the safe choice at 32px.
  */
 export default function Icon() {
   return new ImageResponse(
@@ -18,24 +17,26 @@ export default function Icon() {
           justifyContent: "center",
           width: "100%",
           height: "100%",
-          background: "#0B1017",
-          borderRadius: 7,
-          color: "#FFFFFF",
-          fontSize: 20,
-          fontWeight: 700,
+          background: "linear-gradient(135deg, #FF3B4F 0%, #7A6BFF 100%)",
+          borderRadius: 9,
           position: "relative",
         }}
       >
-        N
+        <div
+          style={{ position: "absolute", left: 8, top: 13, width: 6, height: 6, borderRadius: 3, background: "#08090C" }}
+        />
         <div
           style={{
             position: "absolute",
-            right: 4,
-            bottom: 4,
-            width: 6,
-            height: 6,
-            borderRadius: 3,
-            background: "#D02233",
+            left: 15,
+            top: 8,
+            width: 8,
+            height: 16,
+            borderRadius: 8,
+            border: "2.4px solid #08090C",
+            borderLeftColor: "transparent",
+            borderTopColor: "transparent",
+            borderBottomColor: "transparent",
           }}
         />
       </div>

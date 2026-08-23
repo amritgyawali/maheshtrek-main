@@ -47,7 +47,7 @@ export const en: Dictionary = {
   },
 
   home: {
-    heroEyebrow: "News · Production · Social responsibility",
+    heroEyebrow: "News, Production, Social responsibility",
     heroTitle: "Your close companion at every step",
     heroLead:
       "From honest, fact-based news to high-quality documentary, biography, advertising, and media training — all under one roof.",

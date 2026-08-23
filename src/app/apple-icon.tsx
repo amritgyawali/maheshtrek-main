@@ -13,23 +13,25 @@ export default function AppleIcon() {
           justifyContent: "center",
           width: "100%",
           height: "100%",
-          background: "#0B1017",
-          color: "#FFFFFF",
-          fontSize: 104,
-          fontWeight: 700,
+          background: "linear-gradient(135deg, #FF3B4F 0%, #7A6BFF 100%)",
           position: "relative",
         }}
       >
-        N
+        <div
+          style={{ position: "absolute", left: 44, top: 76, width: 28, height: 28, borderRadius: 14, background: "#08090C" }}
+        />
         <div
           style={{
             position: "absolute",
-            right: 26,
-            bottom: 26,
-            width: 26,
-            height: 26,
-            borderRadius: 13,
-            background: "#D02233",
+            left: 82,
+            top: 50,
+            width: 40,
+            height: 80,
+            borderRadius: 40,
+            border: "12px solid #08090C",
+            borderLeftColor: "transparent",
+            borderTopColor: "transparent",
+            borderBottomColor: "transparent",
           }}
         />
       </div>

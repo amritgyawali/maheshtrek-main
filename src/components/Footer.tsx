@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Logo from "./Logo";
 import SocialIcon from "./SocialIcon";
+import Glow from "./Glow";
 import { href, type Locale } from "@/lib/i18n";
 import { activeSocialLinks, siteConfig } from "@/lib/site-config";
 import type { Dictionary, Section } from "@/content/types";
@@ -17,36 +18,21 @@ const socialLabel: Record<string, string> = {
   instagram: "Instagram",
 };
 
-/** Nav link with a brand rule that draws itself in on hover. */
-function FooterLink({ href: to, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <Link
-      href={to}
-      className="relative inline-block py-0.5 transition-colors hover:text-paper after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-0 after:bg-brand after:transition-all after:duration-300 hover:after:w-full"
-    >
-      {children}
-    </Link>
-  );
-}
-
-function LinkColumn({
-  heading,
-  items,
-  lang,
-}: {
-  heading: string;
-  items: Section[];
-  lang: Locale;
-}) {
+function LinkColumn({ heading, items, lang }: { heading: string; items: Section[]; lang: Locale }) {
   if (items.length === 0) return null;
 
   return (
     <nav aria-label={heading}>
-      <h2 className="text-overline uppercase text-paper">{heading}</h2>
-      <ul className="mt-6 space-y-3.5 text-body-sm">
+      <h2 className="label">{heading}</h2>
+      <ul className="mt-5 space-y-1">
         {items.map((section) => (
           <li key={section.slug}>
-            <FooterLink href={href(lang, section.slug)}>{section.navLabel}</FooterLink>
+            <Link
+              href={href(lang, section.slug)}
+              className="-mx-2 inline-block rounded-lg px-2 py-1.5 text-body-sm text-content-dim transition-colors hover:bg-white/[0.05] hover:text-content"
+            >
+              {section.navLabel}
+            </Link>
           </li>
         ))}
       </ul>
@@ -66,9 +52,8 @@ export default function Footer({ lang, dict }: FooterProps) {
   const services = dict.sections.filter((section) => section.group === "services");
 
   return (
-    <footer className="relative mt-auto overflow-hidden bg-ink text-body-invert">
-      {/* Brand hairline: the only warm line on an otherwise cold surface. */}
-      <div aria-hidden="true" className="h-px w-full bg-gradient-to-r from-brand via-brand/30 to-transparent" />
+    <footer className="relative isolate mt-auto overflow-hidden border-t border-white/[0.07] bg-panel">
+      <Glow tone="iris" className="-bottom-64 left-1/4 h-[560px] w-[560px] opacity-30" />
 
       {/* The document asks for a direct click-through to the news portal, so it
           gets the widest target on the page rather than a link in a list. */}
@@ -76,31 +61,28 @@ export default function Footer({ lang, dict }: FooterProps) {
         href={siteConfig.rightSanchar.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="group block border-b border-line-dark transition-colors hover:bg-ink-soft"
+        className="group block border-b border-white/[0.07] transition-colors hover:bg-white/[0.03]"
       >
-        <div className="container-page flex flex-col gap-6 py-10 sm:flex-row sm:items-center sm:justify-between">
+        <div className="container-page flex flex-col gap-5 py-10 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-overline uppercase text-brand">{dict.ui.portalTagline}</p>
-            <p className="mt-3 font-display text-headline-sm text-paper md:text-headline-md">{portalName}</p>
+            <p className="label-accent">{dict.ui.portalTagline}</p>
+            <p className="mt-3 font-display text-headline-sm text-content md:text-headline-md">
+              {portalName}
+            </p>
           </div>
-          <div className="flex items-center gap-5">
-            <span className="text-body-sm">{siteConfig.rightSanchar.display}</span>
-            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-line-dark text-paper transition-all group-hover:border-brand group-hover:bg-brand">
-              <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">
-                ↗
-              </span>
-            </span>
-          </div>
+          <span className="font-mono text-body-sm text-content-faint transition-colors group-hover:text-accent-text">
+            {siteConfig.rightSanchar.display}
+          </span>
         </div>
       </a>
 
-      <div className="container-page relative grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1.3fr] lg:gap-10">
+      <div className="container-page relative grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1.4fr] lg:gap-10">
         <div>
-          <Logo lang={lang} variant="light" />
-          <p className="mt-6 max-w-xs text-body-sm">{dict.ui.footerTagline}</p>
+          <Logo lang={lang} />
+          <p className="mt-6 max-w-xs text-body-sm text-content-dim">{dict.ui.footerTagline}</p>
 
           {socials.length > 0 && (
-            <ul className="mt-8 flex flex-wrap gap-3">
+            <ul className="mt-8 flex flex-wrap gap-2.5">
               {socials.map(({ key, url }) => (
                 <li key={key}>
                   <a
@@ -108,7 +90,7 @@ export default function Footer({ lang, dict }: FooterProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={socialLabel[key] ?? key}
-                    className="flex h-11 w-11 items-center justify-center rounded-full border border-line-dark text-body-invert transition-colors hover:border-brand hover:bg-brand hover:text-paper"
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-white/[0.1] bg-white/[0.03] text-content-dim transition-colors hover:border-accent/50 hover:bg-accent hover:text-canvas"
                   >
                     <SocialIcon network={key} className="h-[18px] w-[18px]" />
                   </a>
@@ -122,61 +104,56 @@ export default function Footer({ lang, dict }: FooterProps) {
         <LinkColumn heading={dict.ui.servicesHeading} items={services} lang={lang} />
 
         <div>
-          <h2 className="text-overline uppercase text-paper">{dict.ui.contactHeading}</h2>
-          <address className="mt-6 space-y-4 text-body-sm not-italic">
+          <h2 className="label">{dict.ui.contactHeading}</h2>
+          <address className="mt-5 space-y-3.5 text-body-sm not-italic text-content-dim">
             <p>{address}</p>
 
             <p>
-              <a href={`mailto:${siteConfig.email}`} className="transition-colors hover:text-paper">
+              <a
+                href={`mailto:${siteConfig.email}`}
+                className="transition-colors hover:text-content"
+              >
                 {siteConfig.email}
               </a>
             </p>
 
-            <p className="flex flex-col gap-1">
+            <p className="flex flex-col items-start gap-1.5 font-mono">
               {siteConfig.phones.map((phone, index) => (
                 <a
                   key={phone}
                   href={`tel:${siteConfig.phonesE164[index]}`}
-                  className="transition-colors hover:text-paper"
+                  className="transition-colors hover:text-content"
                 >
                   {phone}
                 </a>
               ))}
             </p>
 
-            <p className="text-caption">
-              {days} · {siteConfig.hours.time}
+            <p className="font-mono text-caption text-content-faint">
+              {days}, {siteConfig.hours.time}
             </p>
           </address>
 
           <Link
             href={href(lang, "contact")}
-            className="mt-7 inline-flex items-center gap-2 rounded-full bg-paper px-5 py-2.5 text-body-sm font-medium text-ink transition-colors hover:bg-brand hover:text-paper"
+            className="mt-7 inline-flex items-center rounded-full border border-white/[0.14] bg-white/[0.04] px-5 py-3 text-body-sm font-medium text-content transition-colors hover:border-white/30 hover:bg-white/[0.08]"
           >
             {dict.ui.contactHeading}
-            <span aria-hidden="true">→</span>
           </Link>
         </div>
       </div>
 
-      {/* Oversized wordmark, clipped by the footer. Decorative only. */}
-      <div aria-hidden="true" className="pointer-events-none select-none px-gutter md:px-8">
-        <p className="-mb-[0.18em] whitespace-nowrap font-display text-[clamp(3rem,13vw,11rem)] leading-none tracking-tight text-paper/[0.05]">
-          {dict.siteName}
-        </p>
-      </div>
-
-      <div className="relative border-t border-line-dark">
-        <div className="container-page flex flex-col gap-3 py-6 text-caption md:flex-row md:items-center md:justify-between">
+      <div className="relative border-t border-white/[0.07]">
+        <div className="container-page flex flex-col gap-3 py-6 font-mono text-caption text-content-faint md:flex-row md:items-center md:justify-between">
           <p>
             © {year} {legalName}. {dict.ui.footerRights}
           </p>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <span>
-              {dict.ui.footerVat}: {siteConfig.vat}
+              {dict.ui.footerVat} {siteConfig.vat}
             </span>
-            <a href="#main" className="transition-colors hover:text-paper">
-              {dict.ui.backToTop} ↑
+            <a href="#main" className="py-1 transition-colors hover:text-content">
+              {dict.ui.backToTop}
             </a>
           </div>
         </div>

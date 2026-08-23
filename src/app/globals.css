@@ -4,29 +4,58 @@
 
 @layer base {
   :root {
-    color-scheme: light;
+    color-scheme: dark;
   }
 
   body {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    background-color: #08090c;
   }
 
-  /* Devanagari copy needs a slightly larger optical size and looser leading
-     than the Latin stack to stay readable at the same nominal font-size. */
-  [lang="ne"] body,
-  .font-nepali {
-    font-feature-settings: "kern" 1;
+  /* One visible focus treatment for the whole site. Nothing is allowed to
+     remove it without putting something else in its place. */
+  :focus-visible {
+    outline: 2px solid #ff3b4f;
+    outline-offset: 3px;
+    border-radius: 4px;
   }
 
+  /* Devanagari carries vowel marks above the headstroke and conjuncts below
+     it, so it needs more vertical room than Latin at the same font-size. */
   [lang="ne"] p,
   [lang="ne"] li {
-    line-height: 1.95;
+    line-height: 1.9;
+  }
+
+  [lang="ne"] h1,
+  [lang="ne"] h2,
+  [lang="ne"] h3 {
+    line-height: 1.32;
+  }
+
+  /* Latin-sized tracking visually breaks Devanagari conjuncts apart. */
+  [lang="ne"] .label {
+    letter-spacing: 0.03em;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  .font-mono {
+    font-variant-numeric: tabular-nums;
   }
 
   ::selection {
-    background: #d02233;
-    color: #ffffff;
+    background: #ff3b4f;
+    color: #08090c;
   }
 }
 
@@ -39,24 +68,109 @@
     @apply mt-5;
   }
 
+  /* ---- surfaces -------------------------------------------------------
+     Panels are glass: a translucent white wash over the canvas so whatever
+     glow sits behind them shows through, plus a hairline that is a lighter
+     film rather than a drawn border. */
+  .panel {
+    @apply relative overflow-hidden rounded-2xl border border-white/[0.13] bg-panel-raised/90 shadow-panel backdrop-blur-xl;
+    background-image: linear-gradient(
+      158deg,
+      rgba(255, 255, 255, 0.11) 0%,
+      rgba(255, 255, 255, 0.04) 44%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+  }
+
+  .panel-interactive {
+    @apply panel transition-[transform,border-color,background-color] duration-300;
+  }
+  .panel-interactive:hover {
+    @apply -translate-y-1 border-white/[0.26];
+    background-image: linear-gradient(
+      158deg,
+      rgba(255, 255, 255, 0.16) 0%,
+      rgba(255, 255, 255, 0.06) 44%,
+      rgba(255, 255, 255, 0.025) 100%
+    );
+  }
+
+  /* Top edge highlight — the light catching the lip of a raised surface. */
+  .panel-lip::after {
+    content: "";
+    @apply pointer-events-none absolute inset-x-8 top-0 h-px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  }
+
+  .label {
+    @apply font-mono text-overline uppercase text-content-faint;
+  }
+
+  .label-accent {
+    @apply font-mono text-overline uppercase text-accent-text;
+  }
+
+  /* Small pill used for status and category chips. */
+  .chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/[0.12] bg-white/[0.055] px-3.5 py-2 font-mono text-caption text-content-dim;
+  }
+
   .link-underline {
-    @apply relative inline-flex items-center gap-1.5 font-medium text-brand transition-colors hover:text-brand-dark;
+    @apply font-medium text-content underline decoration-accent decoration-2 underline-offset-4 transition-colors hover:text-accent;
   }
 }
 
-/* Scroll-triggered reveal animation used by the Reveal component */
+@layer utilities {
+  /* Radial light sources. Positioned by the component that uses them. */
+  .glow-accent {
+    background: radial-gradient(closest-side, rgba(255, 59, 79, 0.5), transparent);
+  }
+  .glow-iris {
+    background: radial-gradient(closest-side, rgba(122, 107, 255, 0.45), transparent);
+  }
+
+  /* Faint engineering grid, so the black is a surface rather than a void. */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+  }
+
+  .text-gradient {
+    background: linear-gradient(104deg, #f2f5f9 30%, #ff8a97 70%, #7a6bff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* Scroll-triggered reveal used by the Reveal component. */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  transform: translateY(22px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .reveal.reveal-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Respect reduced-motion preferences across the site */
+/* Load sequence for the hero. Must use the `animate-rise` utility rather than
+   naming the keyframes by hand: Tailwind only emits @keyframes for animations
+   whose utility class appears in the build. */
+.hangs {
+  opacity: 0;
+  @apply animate-rise;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -70,21 +184,25 @@
     opacity: 1;
     transform: none;
   }
+  .hangs {
+    opacity: 1;
+  }
 }
 
 html {
-  scrollbar-color: #d02233 #f5f7fa;
-  scroll-padding-top: 96px;
+  scrollbar-color: #2c3542 #08090c;
+  scroll-padding-top: 104px;
+  touch-action: manipulation;
 }
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #f5f7fa;
+  background: #08090c;
 }
 ::-webkit-scrollbar-thumb {
-  background: #d02233;
+  background: #2c3542;
   border-radius: 9999px;
-  border: 2px solid #f5f7fa;
+  border: 3px solid #08090c;
 }

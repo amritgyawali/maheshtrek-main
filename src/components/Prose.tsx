@@ -10,8 +10,8 @@ export function DraftBadge({ status, label }: { status: ContentStatus; label: st
   if (process.env.NEXT_PUBLIC_SHOW_CONTENT_STATUS !== "1") return null;
 
   return (
-    <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-gold-wash px-3 py-1 text-caption text-gold-dark">
-      <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
+    <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-3.5 py-1.5 font-mono text-caption text-accent-text">
+      <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
       {label}
     </span>
   );
@@ -30,7 +30,7 @@ export default function Prose({ block, draftLabel, size = "md", className = "" }
   return (
     <div className={`max-w-prose ${className}`}>
       <DraftBadge status={block.status} label={draftLabel} />
-      <div className={`prose-body ${textSize} text-body`}>
+      <div className={`prose-body ${textSize} text-content-dim`}>
         {block.paragraphs.map((paragraph) => (
           <p key={paragraph.slice(0, 32)}>{paragraph}</p>
         ))}

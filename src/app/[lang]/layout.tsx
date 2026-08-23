@@ -23,7 +23,7 @@ export function generateStaticParams() {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0B1017",
+  themeColor: "#08090C",
 };
 
 export async function generateMetadata({
@@ -69,19 +69,23 @@ export default async function LocaleLayout({
   const dict = getDictionary(locale);
 
   return (
-    // Sora for display, Inter for Latin body, Mukta for Devanagari.
+    // Anek Devanagari for display, Mukta for body in both scripts, JetBrains
+    // Mono for labels and numerals. All three are Devanagari-capable or fall
+    // back to Mukta, so the Nepali and English trees share one type system.
     <html lang={htmlLang[locale]} className={`scroll-smooth ${fontVariables}`}>
-      <body
-        className={`flex min-h-screen flex-col bg-paper font-sans text-body antialiased ${
-          locale === "ne" ? "font-nepali" : ""
-        }`}
-      >
+      <body className="flex min-h-screen flex-col bg-canvas font-sans text-content-dim antialiased">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-paper"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-accent focus:px-5 focus:py-3 focus:text-canvas"
         >
           {dict.ui.skipToContent}
         </a>
+        {/* Scroll reveals start at opacity 0 and are un-hidden by an
+            IntersectionObserver. Without scripting, nothing would ever un-hide
+            them, so the content is shown outright instead. */}
+        <noscript>
+          <style>{".reveal{opacity:1;transform:none}.hangs{opacity:1}.stroke-draw{transform:scaleX(1)}"}</style>
+        </noscript>
         <Header
           lang={locale}
           siteName={dict.siteName}

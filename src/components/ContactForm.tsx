@@ -25,24 +25,25 @@ export default function ContactForm({ contact }: { contact: ContactPage }) {
   )}&body=${encodeURIComponent(body)}`;
 
   const field =
-    "mt-2 w-full rounded-lg border border-line bg-paper px-4 py-3 text-body-sm text-ink outline-none transition-colors focus:border-ink";
+    "mt-2 w-full rounded-xl border border-white/[0.1] bg-white/[0.03] px-4 py-3.5 text-body-sm text-content outline-none transition-colors placeholder:text-content-faint hover:border-white/20 focus:border-accent";
 
   return (
     <form
-      className="rounded-xl border border-line bg-mist p-6 md:p-8"
+      className="panel panel-lip p-6 md:p-8"
       onSubmit={(event) => {
         event.preventDefault();
         window.location.href = mailto;
       }}
     >
-      <h2 className="font-display text-title-md text-ink">{contact.form.heading}</h2>
+      <h2 className="font-display text-title-md text-content">{contact.form.heading}</h2>
 
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
-        <label className="block text-caption text-body">
+        <label className="block text-caption text-content-faint">
           {contact.form.name}
           <input
             type="text"
             name="name"
+            autoComplete="name"
             required
             value={name}
             onChange={(event) => setName(event.target.value)}
@@ -50,12 +51,16 @@ export default function ContactForm({ contact }: { contact: ContactPage }) {
           />
         </label>
 
-        <label className="block text-caption text-body">
+        <label className="block text-caption text-content-faint">
           {contact.form.email}
           <input
             type="email"
             name="email"
+            autoComplete="email"
+            inputMode="email"
+            spellCheck={false}
             required
+            placeholder="name@example.com"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             className={field}
@@ -63,18 +68,19 @@ export default function ContactForm({ contact }: { contact: ContactPage }) {
         </label>
       </div>
 
-      <label className="mt-5 block text-caption text-body">
+      <label className="mt-5 block text-caption text-content-faint">
         {contact.form.subject}
         <input
           type="text"
           name="subject"
+          autoComplete="off"
           value={subject}
           onChange={(event) => setSubject(event.target.value)}
           className={field}
         />
       </label>
 
-      <label className="mt-5 block text-caption text-body">
+      <label className="mt-5 block text-caption text-content-faint">
         {contact.form.message}
         <textarea
           name="message"
@@ -88,13 +94,12 @@ export default function ContactForm({ contact }: { contact: ContactPage }) {
 
       <button
         type="submit"
-        className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-body-sm font-medium text-paper transition-colors hover:bg-brand-dark"
+        className="mt-7 inline-flex items-center rounded-full bg-accent px-7 py-3.5 text-body-sm font-medium text-canvas transition-all duration-300 hover:bg-[#FF5566] hover:shadow-glow-accent"
       >
         {contact.form.submit}
-        <span aria-hidden="true">→</span>
       </button>
 
-      <p className="mt-4 text-caption text-body">{contact.form.hint}</p>
+      <p className="mt-4 text-caption text-content-faint">{contact.form.hint}</p>
     </form>
   );
 }
