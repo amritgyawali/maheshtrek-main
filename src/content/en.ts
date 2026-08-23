@@ -41,6 +41,9 @@ export const en: Dictionary = {
     draftBadge: "Draft — pending approval",
     navHeading: "Pages",
     contactHeading: "Contact",
+    companyHeading: "Company",
+    servicesHeading: "Services",
+    portalTagline: "Our digital news portal",
   },
 
   home: {
@@ -120,6 +123,7 @@ export const en: Dictionary = {
       title: "Najikako Sathi Media Pvt. Ltd.",
       lead: "A multi-dimensional media house advancing information, entertainment, and social responsibility together.",
       inPrimaryNav: true,
+      group: "company",
       body: {
         status: "doc",
         paragraphs: [
@@ -142,6 +146,7 @@ export const en: Dictionary = {
       title: "Right Sanchar",
       lead: "The digital news portal operated by Najikako Sathi Media Pvt. Ltd.",
       inPrimaryNav: true,
+      group: "company",
       body: {
         status: "doc",
         paragraphs: [
@@ -168,6 +173,7 @@ export const en: Dictionary = {
       title: "From idea to screen",
       lead: "The unit that turns ideas, stories, and messages into living images.",
       inPrimaryNav: true,
+      group: "services",
       body: {
         status: "translated",
         paragraphs: [
@@ -210,6 +216,7 @@ export const en: Dictionary = {
       title: "Advertising",
       lead: "Creative campaigns that turn a brand message into something worth remembering.",
       inPrimaryNav: true,
+      group: "services",
       body: {
         status: "draft",
         paragraphs: [
@@ -233,6 +240,7 @@ export const en: Dictionary = {
       title: "Media & skill development training",
       lead: "Hands-on programs in journalism, video production, and digital content.",
       inPrimaryNav: true,
+      group: "services",
       body: {
         status: "draft",
         paragraphs: [
@@ -256,6 +264,7 @@ export const en: Dictionary = {
       title: "Work aimed at transforming communities",
       lead: "Alongside commercial media services, we stay actively engaged in social initiatives.",
       inPrimaryNav: false,
+      group: "company",
       body: {
         status: "draft",
         paragraphs: [
@@ -273,6 +282,7 @@ export const en: Dictionary = {
       title: "Our team",
       lead: "Every piece of work comes out of one creative team and its equipment.",
       inPrimaryNav: false,
+      group: "company",
       body: {
         status: "draft",
         paragraphs: [
@@ -290,6 +300,7 @@ export const en: Dictionary = {
       title: "Work with us",
       lead: "Open door for people serious about journalism and visual production.",
       inPrimaryNav: false,
+      group: "company",
       body: {
         status: "draft",
         paragraphs: [

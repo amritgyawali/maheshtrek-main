@@ -41,6 +41,9 @@ export const ne: Dictionary = {
     draftBadge: "मस्यौदा — स्वीकृति बाँकी",
     navHeading: "पृष्ठहरू",
     contactHeading: "सम्पर्क",
+    companyHeading: "संस्था",
+    servicesHeading: "सेवाहरू",
+    portalTagline: "हाम्रो डिजिटल समाचार पोर्टल",
   },
 
   home: {
@@ -121,6 +124,7 @@ export const ne: Dictionary = {
       lead:
         "सूचना, मनोरञ्जन र सामाजिक उत्तरदायित्वलाई एकसाथ अगाडि बढाउँदै आएको बहुआयामिक मिडिया संस्था।",
       inPrimaryNav: true,
+      group: "company",
       body: {
         status: "doc",
         paragraphs: [
@@ -143,6 +147,7 @@ export const ne: Dictionary = {
       title: "राईट सञ्चार",
       lead: "नजिकको साथी मिडिया प्रा. लि. द्वारा सञ्चालित डिजिटल समाचार पोर्टल।",
       inPrimaryNav: true,
+      group: "company",
       body: {
         status: "doc",
         paragraphs: [
@@ -169,6 +174,7 @@ export const ne: Dictionary = {
       title: "विचारदेखि पर्दासम्म",
       lead: "विचार, कथा र सन्देशहरूलाई जीवन्त दृश्यमा रूपान्तरण गर्ने उत्पादन इकाइ।",
       inPrimaryNav: true,
+      group: "services",
       body: {
         status: "doc",
         paragraphs: [
@@ -211,6 +217,7 @@ export const ne: Dictionary = {
       title: "विज्ञापन",
       lead: "ब्रान्डको सन्देशलाई सम्झनलायक दृश्यमा ढाल्ने रचनात्मक विज्ञापन।",
       inPrimaryNav: true,
+      group: "services",
       body: {
         status: "draft",
         paragraphs: [
@@ -234,6 +241,7 @@ export const ne: Dictionary = {
       title: "मिडिया तथा सीप विकास तालिम",
       lead: "पत्रकारिता, भिडियो निर्माण र डिजिटल सामग्री उत्पादनसम्बन्धी व्यावहारिक तालिम।",
       inPrimaryNav: true,
+      group: "services",
       body: {
         status: "draft",
         paragraphs: [
@@ -257,6 +265,7 @@ export const ne: Dictionary = {
       title: "समाज रूपान्तरणका लागि",
       lead: "व्यावसायिक मिडिया सेवाका साथसाथै समाज रूपान्तरणका विभिन्न सामाजिक कार्यमा सक्रिय।",
       inPrimaryNav: false,
+      group: "company",
       body: {
         status: "draft",
         paragraphs: [
@@ -274,6 +283,7 @@ export const ne: Dictionary = {
       title: "हाम्रो टोली",
       lead: "उच्च प्रविधि र सिर्जनशील टोलीको सहकार्यबाट तयार हुन्छ हाम्रो हरेक सामग्री।",
       inPrimaryNav: false,
+      group: "company",
       body: {
         status: "draft",
         paragraphs: [
@@ -291,6 +301,7 @@ export const ne: Dictionary = {
       title: "हामीसँग काम गर्नुहोस्",
       lead: "पत्रकारिता र दृश्य उत्पादनमा रुचि राख्नेहरूका लागि खुला ढोका।",
       inPrimaryNav: false,
+      group: "company",
       body: {
         status: "draft",
         paragraphs: [

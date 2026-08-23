@@ -52,6 +52,8 @@ export interface Section {
   cta?: Cta;
   /** Show in the primary header nav (everything shows in the footer). */
   inPrimaryNav: boolean;
+  /** Which footer column the page is listed under. */
+  group: "company" | "services";
 }
 
 export interface HomeCard {
@@ -120,6 +122,9 @@ export interface Ui {
   draftBadge: string;
   navHeading: string;
   contactHeading: string;
+  companyHeading: string;
+  servicesHeading: string;
+  portalTagline: string;
 }
 
 export interface Dictionary {
