@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  body {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Devanagari copy needs a slightly larger optical size and looser leading
+     than the Latin stack to stay readable at the same nominal font-size. */
+  [lang="ne"] body,
+  .font-nepali {
+    font-feature-settings: "kern" 1;
+  }
+
+  [lang="ne"] p,
+  [lang="ne"] li {
+    line-height: 1.95;
+  }
+
+  ::selection {
+    background: #d02233;
+    color: #ffffff;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-container px-gutter md:px-8;
+  }
+
+  .prose-body > p + p {
+    @apply mt-5;
+  }
+
+  .link-underline {
+    @apply relative inline-flex items-center gap-1.5 font-medium text-brand transition-colors hover:text-brand-dark;
+  }
+}
+
+/* Scroll-triggered reveal animation used by the Reveal component */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect reduced-motion preferences across the site */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+html {
+  scrollbar-color: #d02233 #f5f7fa;
+  scroll-padding-top: 96px;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f7fa;
+}
+::-webkit-scrollbar-thumb {
+  background: #d02233;
+  border-radius: 9999px;
+  border: 2px solid #f5f7fa;
+}

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trek Curator</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "slate-gray": "#333333",
+                        "deep-forest": "#043B3F",
+                        "tertiary-fixed-dim": "#f3bb99",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-background": "#1a1c1c",
+                        "on-surface": "#1a1c1c",
+                        "challenging-blue": "#005662",
+                        "primary-container": "#043b3f",
+                        "inverse-on-surface": "#f0f1f0",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#2e3131",
+                        "secondary-fixed-dim": "#59dacd",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#311401",
+                        "on-primary-fixed-variant": "#1e4d51",
+                        "background": "#f9f9f9",
+                        "primary": "#002427",
+                        "inverse-primary": "#a0cfd3",
+                        "primary-fixed-dim": "#a0cfd3",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f9f9f9",
+                        "surface-container": "#edeeee",
+                        "surface-dim": "#d9dada",
+                        "tertiary": "#351703",
+                        "primary-fixed": "#bbebf0",
+                        "vibrant-teal": "#00A99D",
+                        "on-tertiary-container": "#c59273",
+                        "on-tertiary-fixed-variant": "#643e24",
+                        "secondary": "#006a62",
+                        "secondary-fixed": "#78f7e9",
+                        "moderate-teal": "#007A7E",
+                        "outline-variant": "#c0c8c9",
+                        "on-secondary-fixed": "#00201d",
+                        "outline": "#707979",
+                        "surface-container-low": "#f3f4f3",
+                        "error-container": "#ffdad6",
+                        "surface": "#f9f9f9",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#4f2c14",
+                        "on-secondary-fixed-variant": "#00504a",
+                        "surface-variant": "#e2e2e2",
+                        "secondary-container": "#78f7e9",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#77a5aa",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#007169",
+                        "surface-tint": "#38656a",
+                        "on-primary-fixed": "#002022",
+                        "surface-container-high": "#e8e8e8",
+                        "easy-green": "#00A99D",
+                        "tertiary-fixed": "#ffdbc8",
+                        "on-surface-variant": "#404849",
+                        "surface-ice": "#F8F9FA"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "element-gap": "16px",
+                        "section-gap": "80px",
+                        "gutter": "24px",
+                        "margin-x": "32px",
+                        "card-padding": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["\"Source Serif 4\""],
+                        "label-md": ["Manrope"],
+                        "headline-md": ["\"Source Serif 4\""],
+                        "label-sm": ["Manrope"],
+                        "headline-lg": ["\"Source Serif 4\""],
+                        "headline-lg-mobile": ["\"Source Serif 4\""],
+                        "body-lg": ["Manrope"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.25", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface-bright text-on-surface font-body-md text-body-md antialiased selection:bg-vibrant-teal selection:text-white">
+<!-- TopNavBar Component -->
+<header class="w-full bg-surface-container-lowest dark:bg-primary shadow-sm docked full-width top-0 sticky z-50 transition-colors duration-300">
+<div class="flex justify-between items-center max-w-[1280px] mx-auto w-full px-margin-x py-4">
+<!-- Brand Logo -->
+<a class="flex items-center gap-2" href="#">
+<img alt="Trek Curator Logo" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLvzPxEiY8CfTbHOi0ta11eBpWVcSGFVTsXOF8bSbSfXD5xCfWPMjFYAGd8gcnK1Nn9kZW4-XrFmn-osZMWKkrj6lOJr0EWNfjAOy-jmhzL8zgXQhkVv_bzedl2BTHJrI8vwT33cDEVV3n7qX7R4kpPwTSPcoIeihusMf6s_URiVVsqdigVd5vhoKNP3Youh8AEAMOizgdsi2RlechaKOB3zmnsTDvNKilwTa0JkRFuc_-wKjmvwoaAigCHh"/>
+</a>
+<!-- Desktop Navigation -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant font-semibold hover:text-vibrant-teal transition-colors duration-200" href="#">Nepal</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant font-semibold hover:text-vibrant-teal transition-colors duration-200" href="#">Tibet</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant font-semibold hover:text-vibrant-teal transition-colors duration-200" href="#">Bhutan</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant font-semibold hover:text-vibrant-teal transition-colors duration-200" href="#">Trekking</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant font-semibold hover:text-vibrant-teal transition-colors duration-200" href="#">Tours</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant font-semibold hover:text-vibrant-teal transition-colors duration-200" href="#">Blog</a>
+</nav>
+<!-- Actions -->
+<div class="hidden md:flex items-center gap-4">
+<a class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant hover:text-vibrant-teal transition-colors" href="#">
+<span class="flex flex-col text-right">
+<span class="text-[10px] uppercase tracking-wider text-outline">WhatsApp</span>
+<span>+977-9851318186</span>
+</span>
+<span class="material-symbols-outlined text-vibrant-teal">chat</span>
+</a>
+<a class="px-6 py-2.5 bg-deep-forest text-on-primary font-label-md text-label-md rounded-DEFAULT hover:bg-opacity-90 transition-colors" href="#">
+                    Contact Us
+                </a>
+</div>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-deep-forest p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main>
+<!-- Hero Section -->
+<section class="relative w-full h-[600px] md:h-[700px] flex items-center justify-center overflow-hidden">
+<!-- Background Image Placeholder -->
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center" data-alt="A breathtaking panoramic view of a majestic Himalayan mountain peak at sunrise. The sky is ablaze with vibrant hues of orange, pink, and gold, illuminating the rugged, snow-capped ridges. In the foreground, a silhouetted figure of a trekker stands facing the immense scale of the mountains, evoking a sense of awe and adventure. The scene is majestic, awe-inspiring, and utilizes deep forest greens and striking teal tones in the shadows to match the corporate outdoor brand aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCHGXW-dfa987ErBnWuGMpQdEuBr6FMrxVnzWZxjiELmPyq6snJ29R-2plX78Rlu_CXa2jWRliVyP9EKhjTT3nEleX8Zh6rBJfUV4w-SOo57bC6HLvxszC8UZ93Mqe0iCXecXIrWhCZlDJJbp0sEwhrUbzEQnHJ_oaP_TYR0LIXeCCmWtT3QavvmsoBzDVrmd89ZRKVzLbm9X14fKdclaKox3UM2jzEv5p4GGu6O9eBWAx0KnWZjRQlCNuBwKBlWg35Q_cyGfMoJI6m')"></div>
+<!-- Gradient Overlay for legibility -->
+<div class="absolute inset-0 bg-gradient-to-r from-deep-forest/80 via-deep-forest/40 to-transparent"></div>
+</div>
+<div class="relative z-10 w-full max-w-[1280px] mx-auto px-margin-x flex flex-col md:flex-row items-center justify-between gap-gutter">
+<!-- Hero Text -->
+<div class="w-full md:w-1/2 text-white">
+<h1 class="font-headline-xl text-headline-lg-mobile md:text-headline-xl text-white mb-6 drop-shadow-md">Discover the majestic Himalayas with expert guides</h1>
+<div class="flex gap-4">
+<button class="px-8 py-3 bg-vibrant-teal text-white font-label-md text-label-md rounded-DEFAULT flex items-center gap-2 hover:bg-opacity-90 transition-all shadow-sm">
+<span class="material-symbols-outlined">explore</span> Explore Now
+                        </button>
+<button class="px-8 py-3 bg-transparent border border-white text-white font-label-md text-label-md rounded-DEFAULT flex items-center gap-2 hover:bg-white/10 transition-all">
+<span class="material-symbols-outlined">map</span> Top Destinations
+                        </button>
+</div>
+</div>
+<!-- Quick Trip Finder -->
+<div class="w-full md:w-[400px] bg-surface-container-lowest/10 backdrop-blur-md border border-white/20 p-8 rounded-lg shadow-2xl">
+<h2 class="font-headline-md text-headline-md text-white mb-6">Quick Trip Finder</h2>
+<div class="space-y-4">
+<div>
+<label class="block font-label-sm text-label-sm text-white/80 mb-2">Destination</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">location_on</span>
+<input class="w-full pl-10 pr-4 py-3 bg-white/90 border-none rounded-DEFAULT focus:ring-2 focus:ring-vibrant-teal font-body-md text-slate-gray placeholder:text-outline-variant" placeholder="e.g., Annapurna, Everest" type="text"/>
+</div>
+</div>
+<button class="w-full py-3 bg-vibrant-teal text-white font-label-md text-label-md rounded-DEFAULT flex items-center justify-center gap-2 hover:bg-opacity-90 transition-colors shadow-sm mt-4">
+<span class="material-symbols-outlined">search</span> Explore Options
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Packages Section -->
+<section class="py-section-gap px-margin-x max-w-[1280px] mx-auto bg-surface-bright">
+<div class="flex justify-between items-end mb-12">
+<div>
+<span class="text-vibrant-teal font-label-sm text-label-sm uppercase tracking-widest mb-2 block">Featured</span>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-deep-forest">Featured Packages</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Choose a curated trek with clear difficulty, duration, and price.</p>
+</div>
+<button class="hidden md:flex px-6 py-2 bg-vibrant-teal text-white font-label-md text-label-md rounded-DEFAULT items-center gap-2 hover:bg-opacity-90 transition-colors">
+<span class="material-symbols-outlined">visibility</span> View All Packages
+                </button>
+</div>
+<!-- Bento/Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Package Card 1 -->
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_4px_20px_rgba(4,59,63,0.04)] hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(4,59,63,0.08)] transition-all duration-300 flex flex-col group">
+<div class="relative h-[240px] overflow-hidden">
+<img alt="Lower Mustang Muktinath Tour" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLtPy5y76Cfj8Mrja06Z-s0ZkNaXx28BEczP19udXmE3PkyiNUGTT_iFdJt6gl-q4MXioILAj3COkPRDohUaATntL_CE3MTC1KkMCKsIOpDe-mdmqIjt3M0oK1Yjf8I7NiMIqyzLmV1WpAWw_0_SvB2WBVBuoBNvI7xzEO-gtv2Kk-YsuAmgm-gUn3B_4QBzbO-YPu8Fd1s0CVXSMDNHGSur3HnSxVdOZJJa5jANbM27IQayXJUW4Oof_wir"/>
+<div class="absolute top-4 right-4 bg-vibrant-teal text-white font-label-sm text-label-sm px-3 py-1 rounded-full shadow-sm">Easy</div>
+</div>
+<div class="p-card-padding flex-grow flex flex-col justify-between border-b border-surface-container-highest">
+<div>
+<h3 class="font-headline-md text-[20px] text-deep-forest mb-4 leading-tight">Lower Mustang Muktinath Tour</h3>
+<div class="flex items-center gap-6 font-label-md text-label-md text-on-surface-variant mb-6">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px] text-outline">schedule</span> 8 Day</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px] text-outline">sell</span> USD 600</span>
+</div>
+</div>
+</div>
+<div class="p-card-padding bg-surface-container-lowest flex gap-3">
+<button class="flex-1 bg-deep-forest text-white py-2.5 rounded-DEFAULT font-label-md text-label-md flex justify-center items-center gap-2 hover:bg-opacity-90 transition-colors">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span> Book Now
+                        </button>
+<button class="flex-1 bg-transparent border border-outline-variant text-deep-forest py-2.5 rounded-DEFAULT font-label-md text-label-md hover:border-vibrant-teal hover:text-vibrant-teal transition-colors">
+                            Learn More
+                        </button>
+</div>
+</div>
+<!-- Package Card 2 -->
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_4px_20px_rgba(4,59,63,0.04)] hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(4,59,63,0.08)] transition-all duration-300 flex flex-col group">
+<div class="relative h-[240px] overflow-hidden">
+<img alt="Kailash Mansarovar Yatra" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLtCiX_2UoUagi7E7EGzNuT0Jpv9VeH9RTCJwb_BqKG3Wnf7F2uSacivOSVCap3j4bz4hgOckmvIl0v3t74PiW_kEydK0loQ13jLPcaW1otj6rQ6o5JsVn1AavfW7-1OMQ-rNUxqDVpDyZGRnYvf1f14mxFdeo8bl0vjXlffwpSQDW7ZYoPyYCWkSnA2mYHsY8Pxzt-zL_N0_QwtF98h4PlGPJ4LPMQwhijosBbMWuPUR6zyZIiMhrDcqVUQ"/>
+<div class="absolute top-4 right-4 bg-moderate-teal text-white font-label-sm text-label-sm px-3 py-1 rounded-full shadow-sm">Moderate</div>
+</div>
+<div class="p-card-padding flex-grow flex flex-col justify-between border-b border-surface-container-highest">
+<div>
+<h3 class="font-headline-md text-[20px] text-deep-forest mb-4 leading-tight">Kailash Mansarovar Yatra Overland via Kerung</h3>
+<div class="flex items-center gap-6 font-label-md text-label-md text-on-surface-variant mb-6">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px] text-outline">schedule</span> 14 Days</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px] text-outline">sell</span> USD 2500</span>
+</div>
+</div>
+</div>
+<div class="p-card-padding bg-surface-container-lowest flex gap-3">
+<button class="flex-1 bg-deep-forest text-white py-2.5 rounded-DEFAULT font-label-md text-label-md flex justify-center items-center gap-2 hover:bg-opacity-90 transition-colors">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span> Book Now
+                        </button>
+<button class="flex-1 bg-transparent border border-outline-variant text-deep-forest py-2.5 rounded-DEFAULT font-label-md text-label-md hover:border-vibrant-teal hover:text-vibrant-teal transition-colors">
+                            Learn More
+                        </button>
+</div>
+</div>
+<!-- Package Card 3 -->
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_4px_20px_rgba(4,59,63,0.04)] hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(4,59,63,0.08)] transition-all duration-300 flex flex-col group">
+<div class="relative h-[240px] overflow-hidden">
+<img alt="Mera Peak climbing" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLujq7cYMgEf6fKUi4xQVYSxqXgUy0ZTjIu9GHmGOZ0aZuAVS8S5mKBMtjR_gipClI40cViUVZzBsBWLjRS56p08UHaUHXPMQT3NR2nuSuFhOZIsEE_xP3p7Q59Ny7C_ghIc_E0Sb1TEl6k8L5mh9IVqnwPEGVnB1RS82tAca85hE6yZ6nkYPDKoJBGf4zXqKR5InkCGKQrQJ9_cf8VSEkIzpueyBVXSUnn3uuwp9sEM_6T-97XibLnctvQ"/>
+<div class="absolute top-4 right-4 bg-challenging-blue text-white font-label-sm text-label-sm px-3 py-1 rounded-full shadow-sm">Challenging</div>
+</div>
+<div class="p-card-padding flex-grow flex flex-col justify-between border-b border-surface-container-highest">
+<div>
+<h3 class="font-headline-md text-[20px] text-deep-forest mb-4 leading-tight">Mera Peak climbing</h3>
+<div class="flex items-center gap-6 font-label-md text-label-md text-on-surface-variant mb-6">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px] text-outline">schedule</span> 16 Days</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px] text-outline">sell</span> USD 2500</span>
+</div>
+</div>
+</div>
+<div class="p-card-padding bg-surface-container-lowest flex gap-3">
+<button class="flex-1 bg-deep-forest text-white py-2.5 rounded-DEFAULT font-label-md text-label-md flex justify-center items-center gap-2 hover:bg-opacity-90 transition-colors">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span> Book Now
+                        </button>
+<button class="flex-1 bg-transparent border border-outline-variant text-deep-forest py-2.5 rounded-DEFAULT font-label-md text-label-md hover:border-vibrant-teal hover:text-vibrant-teal transition-colors">
+                            Learn More
+                        </button>
+</div>
+</div>
+</div>
+<!-- Mobile View All Button -->
+<button class="w-full mt-8 md:hidden px-6 py-3 bg-vibrant-teal text-white font-label-md text-label-md rounded-DEFAULT flex items-center justify-center gap-2 hover:bg-opacity-90 transition-colors">
+<span class="material-symbols-outlined">visibility</span> View All Packages
+            </button>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="w-full bg-primary text-white pt-section-gap pb-8 px-margin-x">
+<div class="max-w-[1280px] mx-auto flex flex-col gap-12">
+<!-- Newsletter / Contact Block -->
+<div class="flex flex-col lg:flex-row gap-gutter justify-between items-start border-b border-white/10 pb-12">
+<div class="w-full lg:w-1/2">
+<span class="text-vibrant-teal font-label-sm text-label-sm uppercase tracking-widest mb-2 block">Stay Inspired</span>
+<h2 class="font-headline-xl text-headline-lg-mobile md:text-headline-xl text-white mb-4">Sign up for our newsletter</h2>
+<p class="font-body-md text-body-md text-white/70 mb-8 max-w-md">Receive curated trekking ideas, destination updates, seasonal travel tips, and Himalayan adventure inspiration.</p>
+<form class="flex gap-2 w-full max-w-md bg-white p-1 rounded-DEFAULT">
+<input class="flex-1 border-none bg-transparent px-4 py-2 text-slate-gray font-body-md focus:ring-0" placeholder="Enter your email address" type="email"/>
+<button class="bg-deep-forest text-white px-6 py-2 rounded-DEFAULT font-label-md hover:bg-opacity-90 transition-colors" type="submit">Subscribe</button>
+</form>
+</div>
+<!-- Contact Card -->
+<div class="w-full lg:w-1/3 bg-surface-container-lowest/5 border border-white/10 rounded-lg p-6 backdrop-blur-sm">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-vibrant-teal/20 flex items-center justify-center text-vibrant-teal">
+<span class="material-symbols-outlined">support_agent</span>
+</div>
+<h3 class="font-headline-md text-[20px] text-white">Speak with our worldwide representative</h3>
+</div>
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-variant">
+<!-- Placeholder for representative avatar -->
+<span class="material-symbols-outlined w-full h-full flex items-center justify-center text-outline">person</span>
+</div>
+<div>
+<p class="font-label-sm text-vibrant-teal uppercase tracking-wider mb-1">Nepal</p>
+<p class="font-label-md text-white">Taranath Bhatta</p>
+<a class="font-label-md text-white/70 hover:text-white flex items-center gap-1 mt-1" href="#"><span class="material-symbols-outlined text-[16px]">chat</span> +977 9851318186</a>
+</div>
+</div>
+<a class="font-label-md text-vibrant-teal flex items-center gap-1 hover:underline" href="#">View all representatives <span class="material-symbols-outlined text-[18px]">arrow_forward</span></a>
+</div>
+</div>
+<!-- Links Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<div>
+<h4 class="font-headline-md text-[20px] text-white mb-6">Trek Curator</h4>
+<p class="font-body-md text-white/70 mb-6 max-w-xs">Curated trekking and travel experiences across Nepal, Tibet, and Bhutan — built for comfort, clarity, and awe.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-vibrant-teal transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+<!-- Add other social icons as needed using material symbols or simple SVGs -->
+</div>
+</div>
+<div>
+<h4 class="font-label-md text-vibrant-teal uppercase tracking-wider mb-6">Explore</h4>
+<ul class="space-y-3">
+<li><a class="font-label-md text-on-primary-container dark:text-surface-variant hover:text-vibrant-teal transition-colors duration-200" href="#">Nepal</a></li>
+<li><a class="font-label-md text-on-primary-container dark:text-surface-variant hover:text-vibrant-teal transition-colors duration-200" href="#">Tibet</a></li>
+<li><a class="font-label-md text-on-primary-container dark:text-surface-variant hover:text-vibrant-teal transition-colors duration-200" href="#">Bhutan</a></li>
+<li><a class="font-label-md text-on-primary-container dark:text-surface-variant hover:text-vibrant-teal transition-colors duration-200" href="#">Trekking</a></li>
+<li><a class="font-label-md text-on-primary-container dark:text-surface-variant hover:text-vibrant-teal transition-colors duration-200" href="#">Tours</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-vibrant-teal uppercase tracking-wider mb-6">Company</h4>
+<ul class="space-y-3">
+<li><a class="font-label-md text-on-primary-container dark:text-surface-variant hover:text-vibrant-teal transition-colors duration-200" href="#">About Us</a></li>
+<li><a class="font-label-md text-on-primary-container dark:text-surface-variant hover:text-vibrant-teal transition-colors duration-200" href="#">Contact Us</a></li>
+<li><a class="font-label-md text-on-primary-container dark:text-surface-variant hover:text-vibrant-teal transition-colors duration-200" href="#">Blog</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-vibrant-teal uppercase tracking-wider mb-6">Contact</h4>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-vibrant-teal mt-0.5">mail</span>
+<a class="font-label-md text-white/80 hover:text-white" href="mailto:info@trekcurator.com">info@trekcurator.com</a>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-vibrant-teal mt-0.5">call</span>
+<span class="font-label-md text-white/80">+977-9851318186</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-vibrant-teal mt-0.5">location_on</span>
+<span class="font-label-md text-white/80">Thamel, Kathmandu, Nepal</span>
+</li>
+</ul>
+<button class="mt-6 w-full py-3 bg-vibrant-teal text-white font-label-md text-label-md rounded-DEFAULT flex items-center justify-center gap-2 hover:bg-opacity-90 transition-colors">
+<span class="material-symbols-outlined">chat</span> Chat on WhatsApp
+                    </button>
+</div>
+</div>
+<!-- Bottom Bar -->
+<div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 mt-4">
+<p class="font-label-sm text-label-sm text-white/60 mb-4 md:mb-0">© 2026 Trek Curator. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="font-label-sm text-label-sm text-white/60 hover:text-vibrant-teal transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-white/60 hover:text-vibrant-teal transition-colors" href="#">Terms and Condition</a>
+<a class="font-label-sm text-label-sm text-white/60 hover:text-vibrant-teal transition-colors" href="#">Sitemap</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

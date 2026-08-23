@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trek Curator | High-Altitude Precision Logistics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-fixed": "#311401",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#2d3135",
+                        "surface-variant": "#e0e3e8",
+                        "on-primary-container": "#77a5aa",
+                        "primary-fixed": "#bbebf0",
+                        "on-secondary-fixed": "#002022",
+                        "on-surface": "#181c20",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c0c8c9",
+                        "surface-container-low": "#f1f4f9",
+                        "white": "#FFFFFF",
+                        "secondary": "#006971",
+                        "background": "#f7f9ff",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#ffdbc8",
+                        "inverse-on-surface": "#eef1f6",
+                        "surface-container": "#ebeef3",
+                        "on-tertiary-container": "#c59273",
+                        "surface-bright": "#f7f9ff",
+                        "surface-dim": "#d7dadf",
+                        "surface-mist": "#F0F7F8",
+                        "surface-container-high": "#e5e8ee",
+                        "primary-container": "#043b3f",
+                        "on-primary-fixed-variant": "#1e4d51",
+                        "primary-fixed-dim": "#a0cfd3",
+                        "on-background": "#181c20",
+                        "secondary-container": "#8cf2fd",
+                        "surface-tint": "#38656a",
+                        "surface": "#f7f9ff",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#f3bb99",
+                        "tertiary-container": "#4f2c14",
+                        "on-secondary-fixed-variant": "#004f55",
+                        "on-primary-fixed": "#002022",
+                        "surface-container-highest": "#e0e3e8",
+                        "on-secondary-container": "#006f78",
+                        "outline": "#707979",
+                        "primary": "#002427",
+                        "secondary-fixed": "#8cf2fd",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#404849",
+                        "inverse-primary": "#a0cfd3",
+                        "on-tertiary-fixed-variant": "#643e24",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#351703",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#6fd6e0"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.125rem",
+                        lg: "0.25rem",
+                        xl: "0.5rem",
+                        full: "0.75rem"
+                    },
+                    spacing: {
+                        md: "24px",
+                        sm: "12px",
+                        xs: "4px",
+                        lg: "48px",
+                        "margin-mobile": "16px",
+                        base: "8px",
+                        "container-max": "1280px",
+                        gutter: "24px",
+                        xl: "80px"
+                    },
+                    fontFamily: {
+                        caption: ["Manrope", "sans-serif"],
+                        "body-lg": ["Manrope", "sans-serif"],
+                        "display-lg": ["\"Source Serif 4\"", "serif"],
+                        "body-md": ["Manrope", "sans-serif"],
+                        "headline-sm": ["\"Source Serif 4\"", "serif"],
+                        "label-md": ["Manrope", "sans-serif"],
+                        "title-lg": ["Manrope", "sans-serif"],
+                        "headline-md": ["\"Source Serif 4\"", "serif"],
+                        "display-lg-mobile": ["\"Source Serif 4\"", "serif"]
+                    },
+                    fontSize: {
+                        caption: ["12px", { lineHeight: "16px", fontWeight: "500" }],
+                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                        "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "headline-sm": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.05em", fontWeight: "600" }],
+                        "title-lg": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+                        "headline-md": ["32px", { lineHeight: "40px", fontWeight: "600" }],
+                        "display-lg-mobile": ["36px", { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[style*="font-variation-settings: 'FILL' 1"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .shadow-ambient {
+            box-shadow: 0 8px 30px rgba(4, 59, 63, 0.05);
+        }
+        /* Alpine JS like transitions for nav dropdowns */
+        .group:hover .group-hover\:opacity-100 {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body class="bg-surface-mist font-body-md text-on-surface antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-white w-full top-0 sticky z-50 border-b border-surface-container-high transition-all duration-300">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter h-20 flex justify-between items-center">
+<!-- Brand Logo -->
+<a class="flex items-center gap-2 group" href="#">
+<span class="material-symbols-outlined text-secondary text-3xl group-hover:text-primary transition-colors">landscape</span>
+<span class="font-headline-sm text-primary tracking-tight">Trek Curator</span>
+</a>
+<!-- Navigation Links (Desktop) -->
+<nav class="hidden md:flex items-center gap-8 h-full">
+<div class="relative h-full flex items-center group">
+<a class="font-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200 flex items-center gap-1 cursor-pointer" href="#">
+                        Destinations <span class="material-symbols-outlined text-sm">expand_more</span>
+</a>
+<div class="absolute top-full left-0 mt-0 w-48 bg-white shadow-ambient rounded-b-lg border-t border-secondary opacity-0 invisible group-hover:opacity-100 transition-all duration-200 py-2">
+<a class="block px-4 py-2 font-label-md text-on-surface-variant hover:bg-surface-mist hover:text-secondary" href="#">Nepal</a>
+<a class="block px-4 py-2 font-label-md text-on-surface-variant hover:bg-surface-mist hover:text-secondary" href="#">Tibet</a>
+<a class="block px-4 py-2 font-label-md text-on-surface-variant hover:bg-surface-mist hover:text-secondary" href="#">Bhutan</a>
+</div>
+</div>
+<div class="relative h-full flex items-center group">
+<a class="font-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200 flex items-center gap-1 cursor-pointer" href="#">
+                        Trek Styles <span class="material-symbols-outlined text-sm">expand_more</span>
+</a>
+<div class="absolute top-full left-0 mt-0 w-48 bg-white shadow-ambient rounded-b-lg border-t border-secondary opacity-0 invisible group-hover:opacity-100 transition-all duration-200 py-2">
+<a class="block px-4 py-2 font-label-md text-on-surface-variant hover:bg-surface-mist hover:text-secondary" href="#">Trekking</a>
+<a class="block px-4 py-2 font-label-md text-on-surface-variant hover:bg-surface-mist hover:text-secondary" href="#">Tours</a>
+</div>
+</div>
+<a class="font-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200 cursor-pointer" href="#">Safety</a>
+<a class="font-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200 cursor-pointer" href="#">Planning</a>
+<a class="font-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200 cursor-pointer" href="#">Journal</a>
+</nav>
+<!-- Trailing Action -->
+<div class="hidden md:flex items-center gap-4">
+<a class="flex items-center gap-2 font-label-md text-on-surface-variant hover:text-secondary transition-colors" href="https://wa.me/9779851318186">
+<span class="text-caption text-on-surface-variant text-right leading-tight">WHATSAPP<br/><span class="font-bold">+977-9851318186</span></span>
+<span class="material-symbols-outlined text-white bg-secondary rounded-full p-1" style="font-variation-settings: 'FILL' 1;">chat</span>
+</a>
+<a class="bg-secondary text-white font-label-md px-6 py-3 rounded-lg hover:bg-primary-container transition-colors duration-200 active:opacity-80" href="#">Book Now</a>
+</div>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-primary focus:outline-none p-2">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow">
+<!-- Hero Section with Finder -->
+<section class="relative h-[600px] md:h-[700px] w-full flex items-center justify-center overflow-hidden">
+<!-- Background Image Placeholder (representing a majestic mountain landscape at sunrise) -->
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A breathtaking, ultra-high-resolution photograph of Mount Everest at sunrise. The sky is painted with vibrant hues of orange, pink, and deep purple, casting a warm glow over the snow-capped peaks. The scene is epic and awe-inspiring, embodying the spirit of high-altitude adventure and precision logistics. A solitary, ancient stone chorten adorned with colorful prayer flags stands in the foreground, adding a touch of cultural authenticity to the pristine, minimalist mountain landscape." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDXjoN-KI6aCJz5yjUrxhOVAuTVrBfX3I8oGAd6_68mJH4YAosnjQPKLfW_HgU2yL6pIPKGbkIG8-rsoNyCY29xT4tZ2giajMiSSJrH4tIZpoaWlaapEUDaHWIBAstOkbcka644aIBLlBx95BPjNLBm1SXNR2IZBYFAxu55WtXexUW2c7XIDeFbgENFbSJ8Pu-Eq8NYjBmq5bauCf9DKCooDj3tHHs3NNdYyykXwFDxShkMkBIaT6p1OHZ3UcDC8zPaaUwMIYeQ6LYD')">
+<div class="absolute inset-0 bg-primary/40 mix-blend-multiply"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-container-max w-full mx-auto px-margin-mobile md:px-gutter grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+<!-- Hero Content -->
+<div class="text-white">
+<h1 class="font-display-lg-mobile md:font-display-lg mb-6 leading-tight drop-shadow-md">Curated Trekking &amp; Travel Experiences</h1>
+<div class="flex flex-wrap gap-4 mt-8">
+<a class="inline-flex items-center gap-2 bg-secondary text-white font-label-md px-6 py-3 rounded-lg hover:bg-white hover:text-secondary transition-colors duration-200 shadow-ambient" href="#">
+<span class="material-symbols-outlined">explore</span> Explore Now
+                        </a>
+<a class="inline-flex items-center gap-2 bg-transparent border border-white text-white font-label-md px-6 py-3 rounded-lg hover:bg-white/10 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">map</span> Top Destinations
+                        </a>
+</div>
+</div>
+<!-- Trip Finder Glassmorphism Card -->
+<div class="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-xl shadow-ambient w-full max-w-md ml-auto">
+<h2 class="font-title-lg text-white mb-4">Quick Trip Finder</h2>
+<form class="flex flex-col gap-4">
+<div>
+<label class="block font-caption text-white/80 mb-1">Destination</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/50">location_on</span>
+<input class="w-full pl-10 pr-4 py-3 bg-white/90 border-transparent rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent font-body-md text-on-surface" placeholder="e.g., Annapurna, Everest" type="text"/>
+</div>
+</div>
+<button class="w-full bg-secondary text-white font-label-md px-6 py-3 rounded-lg hover:bg-primary transition-colors flex items-center justify-center gap-2 mt-2" type="button">
+<span class="material-symbols-outlined">search</span> Explore Options
+                        </button>
+</form>
+</div>
+</div>
+</section>
+<!-- Featured Packages Section -->
+<section class="py-xl bg-surface-mist">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+<div>
+<span class="font-label-md text-secondary uppercase tracking-wider block mb-2">Featured</span>
+<h2 class="font-headline-md text-primary">Featured Packages</h2>
+<p class="font-body-md text-on-surface-variant mt-2 max-w-2xl">Choose a curated trek with clear difficulty, duration, and price.</p>
+</div>
+<a class="inline-flex items-center gap-2 bg-secondary text-white font-label-md px-6 py-3 rounded-lg hover:bg-primary transition-colors shrink-0" href="#">
+<span class="material-symbols-outlined">grid_view</span> View All Packages
+                    </a>
+</div>
+<!-- CSS Grid for Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Package Card 1 -->
+<div class="bg-white rounded-lg shadow-ambient overflow-hidden group flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
+<div class="relative h-56 overflow-hidden">
+<img alt="Lower Mustang Muktinath Tour" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLtPy5y76Cfj8Mrja06Z-s0ZkNaXx28BEczP19udXmE3PkyiNUGTT_iFdJt6gl-q4MXioILAj3COkPRDohUaATntL_CE3MTC1KkMCKsIOpDe-mdmqIjt3M0oK1Yjf8I7NiMIqyzLmV1WpAWw_0_SvB2WBVBuoBNvI7xzEO-gtv2Kk-YsuAmgm-gUn3B_4QBzbO-YPu8Fd1s0CVXSMDNHGSur3HnSxVdOZJJa5jANbM27IQayXJUW4Oof_wir"/>
+<span class="absolute top-4 right-4 bg-secondary-container text-on-secondary-container font-caption px-3 py-1 rounded-full shadow-sm">Easy</span>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-title-lg text-primary mb-3 line-clamp-2">Lower Mustang Muktinath Tour</h3>
+<div class="flex items-center gap-4 text-sm text-on-surface-variant mb-6 mt-auto">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 8 Day</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">payments</span> USD 600</span>
+</div>
+<div class="flex items-center gap-3 w-full">
+<a class="flex-1 bg-secondary text-white text-center font-label-md py-2 rounded-lg hover:bg-primary transition-colors flex items-center justify-center gap-2" href="#">
+<span class="material-symbols-outlined text-sm">shopping_bag</span> Book Now
+                                </a>
+<a class="flex-1 bg-transparent border border-outline-variant text-primary text-center font-label-md py-2 rounded-lg hover:border-secondary hover:text-secondary transition-colors" href="#">
+                                    Learn More
+                                </a>
+</div>
+</div>
+</div>
+<!-- Package Card 2 -->
+<div class="bg-white rounded-lg shadow-ambient overflow-hidden group flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
+<div class="relative h-56 overflow-hidden">
+<img alt="Kailash Mansarovar Yatra Overland via Kerung" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLtCiX_2UoUagi7E7EGzNuT0Jpv9VeH9RTCJwb_BqKG3Wnf7F2uSacivOSVCap3j4bz4hgOckmvIl0v3t74PiW_kEydK0loQ13jLPcaW1otj6rQ6o5JsVn1AavfW7-1OMQ-rNUxqDVpDyZGRnYvf1f14mxFdeo8bl0vjXlffwpSQDW7ZYoPyYCWkSnA2mYHsY8Pxzt-zL_N0_QwtF98h4PlGPJ4LPMQwhijosBbMWuPUR6zyZIiMhrDcqVUQ"/>
+<span class="absolute top-4 right-4 bg-primary-fixed text-on-primary-fixed font-caption px-3 py-1 rounded-full shadow-sm">Moderate</span>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-title-lg text-primary mb-3 line-clamp-2">Kailash Mansarovar Yatra Overland via Kerung</h3>
+<div class="flex items-center gap-4 text-sm text-on-surface-variant mb-6 mt-auto">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 14 Days</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">payments</span> USD 2500</span>
+</div>
+<div class="flex items-center gap-3 w-full">
+<a class="flex-1 bg-secondary text-white text-center font-label-md py-2 rounded-lg hover:bg-primary transition-colors flex items-center justify-center gap-2" href="#">
+<span class="material-symbols-outlined text-sm">shopping_bag</span> Book Now
+                                </a>
+<a class="flex-1 bg-transparent border border-outline-variant text-primary text-center font-label-md py-2 rounded-lg hover:border-secondary hover:text-secondary transition-colors" href="#">
+                                    Learn More
+                                </a>
+</div>
+</div>
+</div>
+<!-- Package Card 3 -->
+<div class="bg-white rounded-lg shadow-ambient overflow-hidden group flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
+<div class="relative h-56 overflow-hidden">
+<img alt="Mera Peak climbing" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLujq7cYMgEf6fKUi4xQVYSxqXgUy0ZTjIu9GHmGOZ0aZuAVS8S5mKBMtjR_gipClI40cViUVZzBsBWLjRS56p08UHaUHXPMQT3NR2nuSuFhOZIsEE_xP3p7Q59Ny7C_ghIc_E0Sb1TEl6k8L5mh9IVqnwPEGVnB1RS82tAca85hE6yZ6nkYPDKoJBGf4zXqKR5InkCGKQrQJ9_cf8VSEkIzpueyBVXSUnn3uuwp9sEM_6T-97XibLnctvQ"/>
+<span class="absolute top-4 right-4 bg-error-container text-on-error-container font-caption px-3 py-1 rounded-full shadow-sm">Challenging</span>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-title-lg text-primary mb-3 line-clamp-2">Mera Peak climbing</h3>
+<div class="flex items-center gap-4 text-sm text-on-surface-variant mb-6 mt-auto">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 16 Days</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">payments</span> USD 2500</span>
+</div>
+<div class="flex items-center gap-3 w-full">
+<a class="flex-1 bg-secondary text-white text-center font-label-md py-2 rounded-lg hover:bg-primary transition-colors flex items-center justify-center gap-2" href="#">
+<span class="material-symbols-outlined text-sm">shopping_bag</span> Book Now
+                                </a>
+<a class="flex-1 bg-transparent border border-outline-variant text-primary text-center font-label-md py-2 rounded-lg hover:border-secondary hover:text-secondary transition-colors" href="#">
+                                    Learn More
+                                </a>
+</div>
+</div>
+</div>
+<!-- Package Card 4 -->
+<div class="bg-white rounded-lg shadow-ambient overflow-hidden group flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
+<div class="relative h-56 overflow-hidden">
+<img alt="Manaslu Circuit Trek" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLuZKrNKeymkDLPmQLLFufKO97151NG7jwYnSND8-x1BMQs0yAWfw8bKQBMPnwsRfRkZqL6vJGe7_9dDmej-ETHyhJIeb0oXJAhzdhFexQKwoeIUHJwQAlA25plCHC5cRC-lSYb2YrUMSOxzf-MRCm0JdbTirU5vKUXH76_Qg3yg5DOFDezQwY1eSX8AZT9MlSsByPPlg-7f4rzJ237l8E25ucuWALLZpzZirK3xe9IDPp0h-06iVxSlbYOH"/>
+<span class="absolute top-4 right-4 bg-error-container text-on-error-container font-caption px-3 py-1 rounded-full shadow-sm">Challenging</span>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-title-lg text-primary mb-3 line-clamp-2">Manaslu Circuit Trek</h3>
+<div class="flex items-center gap-4 text-sm text-on-surface-variant mb-6 mt-auto">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 15 Days</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">payments</span> USD 1000</span>
+</div>
+<div class="flex items-center gap-3 w-full">
+<a class="flex-1 bg-secondary text-white text-center font-label-md py-2 rounded-lg hover:bg-primary transition-colors flex items-center justify-center gap-2" href="#">
+<span class="material-symbols-outlined text-sm">shopping_bag</span> Book Now
+                                </a>
+<a class="flex-1 bg-transparent border border-outline-variant text-primary text-center font-label-md py-2 rounded-lg hover:border-secondary hover:text-secondary transition-colors" href="#">
+                                    Learn More
+                                </a>
+</div>
+</div>
+</div>
+<!-- Package Card 5 -->
+<div class="bg-white rounded-lg shadow-ambient overflow-hidden group flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
+<div class="relative h-56 overflow-hidden">
+<img alt="Annapurna Base Camp Trek" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLsuA-6i7DtD8hDXehH3LmaM17aSIOLF8stOMF_NCnBpEoDx7H6d4Tujm9QEccZXl_j8sNFOwCZ8CShBFMdEUqjJMJLnz20Mw9JHNmtPZBARVPLDfbKxVc7nzZa2hWnTm58exQBxNCCpmnP3npI5JjAGm3SJT61iZzrC1qzu9Wcs8hozwsF6hYijdqgEcWm_MNWpRz0B8kSIfapkpKNUM6A9p_g7m-nSHWC9UI6fs8YSedKaYEWqzfon5CQw"/>
+<span class="absolute top-4 right-4 bg-primary-fixed text-on-primary-fixed font-caption px-3 py-1 rounded-full shadow-sm">Moderate</span>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-title-lg text-primary mb-3 line-clamp-2">Annapurna Base Camp Trek</h3>
+<div class="flex items-center gap-4 text-sm text-on-surface-variant mb-6 mt-auto">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 12 Days</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">payments</span> USD 500</span>
+</div>
+<div class="flex items-center gap-3 w-full">
+<a class="flex-1 bg-secondary text-white text-center font-label-md py-2 rounded-lg hover:bg-primary transition-colors flex items-center justify-center gap-2" href="#">
+<span class="material-symbols-outlined text-sm">shopping_bag</span> Book Now
+                                </a>
+<a class="flex-1 bg-transparent border border-outline-variant text-primary text-center font-label-md py-2 rounded-lg hover:border-secondary hover:text-secondary transition-colors" href="#">
+                                    Learn More
+                                </a>
+</div>
+</div>
+</div>
+<!-- Package Card 6 -->
+<div class="bg-white rounded-lg shadow-ambient overflow-hidden group flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
+<div class="relative h-56 overflow-hidden">
+<img alt="Everest Base Camp Trek" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLui3BD_fhw4YYy_-hYXR3zM-eWbXodA6TCTORugv4vOMyc1dePH41cc8ZHyz8-6fDVwIO42nfSX_6cnpSkQBRUsJuiHd5cFlyVRKLMoG3ZdvU6PLYgIJsGvwfqfWAIy6O527v8JqzdAt9xYwPdPUTtfVOqBMcY5ZnsRVq9dCc12SXrXIC0tHiSveDHDeVslPtwFA9h2tq4GqHcnqtLRvVnVJbUchcdPCPwJHMQxioyXh1LqbJYlSCtcEi4A"/>
+<span class="absolute top-4 right-4 bg-error-container text-on-error-container font-caption px-3 py-1 rounded-full shadow-sm">Challenging</span>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-title-lg text-primary mb-3 line-clamp-2">Everest Base Camp Trek</h3>
+<div class="flex items-center gap-4 text-sm text-on-surface-variant mb-6 mt-auto">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 14 Days</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">payments</span> USD 1300</span>
+</div>
+<div class="flex items-center gap-3 w-full">
+<a class="flex-1 bg-secondary text-white text-center font-label-md py-2 rounded-lg hover:bg-primary transition-colors flex items-center justify-center gap-2" href="#">
+<span class="material-symbols-outlined text-sm">shopping_bag</span> Book Now
+                                </a>
+<a class="flex-1 bg-transparent border border-outline-variant text-primary text-center font-label-md py-2 rounded-lg hover:border-secondary hover:text-secondary transition-colors" href="#">
+                                    Learn More
+                                </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-primary dark:bg-on-primary-container w-full pt-xl pb-lg border-t border-outline-variant mt-auto text-white">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter grid grid-cols-1 md:grid-cols-4 gap-lg">
+<!-- Brand / Newsletter -->
+<div class="md:col-span-1 flex flex-col">
+<a class="font-display-lg text-headline-sm text-white mb-4" href="#">Trek Curator</a>
+<p class="font-body-md text-on-primary-container mb-6 text-sm">Curated trekking and travel experiences across Nepal, Tibet, and Bhutan — built for comfort, clarity, and awe.</p>
+<div class="flex items-center gap-4 mb-6">
+<a class="text-on-primary-container hover:text-secondary-fixed transition-colors" href="#"><span class="material-symbols-outlined">face_nod</span></a>
+<a class="text-on-primary-container hover:text-secondary-fixed transition-colors" href="#"><span class="material-symbols-outlined">photo_camera</span></a>
+<a class="text-on-primary-container hover:text-secondary-fixed transition-colors" href="#"><span class="material-symbols-outlined">flutter_dash</span></a>
+<a class="text-on-primary-container hover:text-secondary-fixed transition-colors" href="#"><span class="material-symbols-outlined">smart_display</span></a>
+</div>
+</div>
+<!-- Explore Links -->
+<div class="flex flex-col gap-2">
+<h4 class="font-label-md text-white font-bold mb-2">Explore</h4>
+<a class="font-body-md text-on-primary-container hover:text-secondary-fixed transition-colors focus:outline-none focus:ring-2 focus:ring-secondary-fixed w-fit" href="#">Nepal</a>
+<a class="font-body-md text-on-primary-container hover:text-secondary-fixed transition-colors focus:outline-none focus:ring-2 focus:ring-secondary-fixed w-fit" href="#">Tibet</a>
+<a class="font-body-md text-on-primary-container hover:text-secondary-fixed transition-colors focus:outline-none focus:ring-2 focus:ring-secondary-fixed w-fit" href="#">Bhutan</a>
+<a class="font-body-md text-on-primary-container hover:text-secondary-fixed transition-colors focus:outline-none focus:ring-2 focus:ring-secondary-fixed w-fit" href="#">Trekking</a>
+<a class="font-body-md text-on-primary-container hover:text-secondary-fixed transition-colors focus:outline-none focus:ring-2 focus:ring-secondary-fixed w-fit" href="#">Tours</a>
+</div>
+<!-- Company Links -->
+<div class="flex flex-col gap-2">
+<h4 class="font-label-md text-white font-bold mb-2">Company</h4>
+<a class="font-body-md text-on-primary-container hover:text-secondary-fixed transition-colors focus:outline-none focus:ring-2 focus:ring-secondary-fixed w-fit" href="#">About Us</a>
+<a class="font-body-md text-on-primary-container hover:text-secondary-fixed transition-colors focus:outline-none focus:ring-2 focus:ring-secondary-fixed w-fit" href="#">Contact Us</a>
+<a class="font-body-md text-on-primary-container hover:text-secondary-fixed transition-colors focus:outline-none focus:ring-2 focus:ring-secondary-fixed w-fit" href="#">Blog</a>
+</div>
+<!-- Contact Info -->
+<div class="flex flex-col gap-2">
+<h4 class="font-label-md text-white font-bold mb-2">Contact</h4>
+<a class="font-body-md text-on-primary-container flex items-center gap-2 hover:text-secondary-fixed transition-colors" href="mailto:info@trekcurator.com"><span class="material-symbols-outlined text-sm">mail</span> info@trekcurator.com</a>
+<a class="font-body-md text-on-primary-container flex items-center gap-2 hover:text-secondary-fixed transition-colors" href="tel:+9779851318186"><span class="material-symbols-outlined text-sm">call</span> +977-9851318186</a>
+<span class="font-body-md text-on-primary-container flex items-center gap-2"><span class="material-symbols-outlined text-sm">location_on</span> Thamel, Kathmandu, Nepal</span>
+<a class="mt-4 inline-flex items-center gap-2 bg-secondary text-white font-label-md px-4 py-2 rounded-lg hover:bg-secondary-fixed hover:text-primary transition-colors w-fit" href="https://wa.me/9779851318186">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">chat</span> Chat on WhatsApp
+                </a>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs text-on-primary-container">
+<p>© 2024 Trek Curator. High-Altitude Precision Logistics.</p>
+<div class="flex gap-4 mt-4 md:mt-0">
+<a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-white transition-colors" href="#">Terms and Condition</a>
+<a class="hover:text-white transition-colors" href="#">Sitemap</a>
+</div>
+</div>
+</footer>
+</body></html>
