@@ -4,7 +4,7 @@ import "../globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
-import { getDictionary } from "@/content";
+import { getDictionary, serviceCategories, servicesInCategory } from "@/content";
 import { htmlLang, isLocale, locales, type Locale } from "@/lib/i18n";
 import { buildMetadata } from "@/lib/metadata";
 import { fontVariables } from "@/lib/fonts";
@@ -95,11 +95,26 @@ export default async function LocaleLayout({
             language: dict.ui.languageSwitcherLabel,
             nav: dict.ui.navHeading,
             contact: dict.ui.contactHeading,
+            services: dict.ui.servicesHeading,
+            allServices: dict.ui.allServicesLabel,
+            overview: dict.ui.exploreLabel,
           }}
-          items={dict.sections.map((section) => ({
-            slug: section.slug,
-            label: section.navLabel,
-            primary: section.inPrimaryNav,
+          // Categories are reached through the services menu, so listing them
+          // again as flat links would put the same page in the bar twice.
+          items={dict.sections
+            .filter((section) => !section.isServiceCategory)
+            .map((section) => ({
+              slug: section.slug,
+              label: section.navLabel,
+              primary: section.inPrimaryNav,
+            }))}
+          serviceCategories={serviceCategories(locale).map((category) => ({
+            slug: category.slug,
+            label: category.navLabel,
+            services: servicesInCategory(locale, category.slug).map((service) => ({
+              slug: service.slug,
+              label: service.navLabel,
+            })),
           }))}
         />
         <main id="main" className="flex-grow">

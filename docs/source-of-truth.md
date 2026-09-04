@@ -1,11 +1,13 @@
 # Source of truth — Najikako Sathi Media Pvt. Ltd.
 
-Everything the site says about the company comes from two places:
+Everything the site says about the company comes from three places:
 
 1. **`Najik.docx`** (repo root) — the client's company profile.
 2. **The contact block supplied with it** (address, phone, email, VAT).
+3. **`Service_Portfolio_Overview.pdf`** — the client's scope-of-work document,
+   which names and describes all sixteen services. Recorded in section 6 below.
 
-This file records both, in full, so nobody has to re-open the `.docx` or
+This file records all three, in full, so nobody has to re-open the `.docx` or
 re-run the Preeti decoding to check a sentence.
 
 ---
@@ -69,9 +71,10 @@ python -c "from npttf2utf import FontMapper; import npttf2utf, os; \
 
 Status keys match `ContentStatus` in [`src/content/types.ts`](../src/content/types.ts):
 
-- `doc` — in the document, reproduced faithfully
-- `translated` — the document has it in one language only; the other side is our translation
-- `draft` — the document *names* the service but does not describe it; copy is ours and unapproved
+- `doc` — in `Najik.docx`, reproduced faithfully
+- `portfolio` — in `Service_Portfolio_Overview.pdf`, reproduced faithfully
+- `translated` — a source has it in one language only; the other side is our translation
+- `draft` — the sources *name* the service but do not describe it; copy is ours and unapproved
 
 ### Introduction — `doc` (both languages)
 
@@ -104,11 +107,20 @@ The document then writes `Production भित्रै` ("inside Production") a
 - **Biography** — English `doc`, Nepali `doc`
 - **Documentary** — Nepali `doc` (2 paragraphs), English `doc` (2 paragraphs)
 
-### Advertising, Training, Social initiatives — `draft`
+The Biography and Documentary paragraphs are no longer rendered as
+subsections of `/production`: each is now a page of its own under
+`/production/biography` and `/production/documentary`, carrying the same text.
+Keeping both would have put identical paragraphs on two URLs.
 
-Named in the introduction, never described. The pages exist with our copy and
-are marked `draft`. Run the site with `NEXT_PUBLIC_SHOW_CONTENT_STATUS=1` to
-see the badge on every unapproved block.
+### Advertising, Training, Social initiatives — described in the PDF
+
+Named in the introduction of `Najik.docx` and never described there, these were
+`draft` until `Service_Portfolio_Overview.pdf` arrived. Their body copy is now
+`portfolio` (English) / `translated` (Nepali); see section 6. The material around the
+body — deliverables, process stages, FAQ answers — is still ours and still
+`draft`, carried on each page's `supportStatus`. Run the site with
+`NEXT_PUBLIC_SHOW_CONTENT_STATUS=1` to see the badge on every unapproved
+block.
 
 ### Team, Careers — `draft`
 
@@ -133,13 +145,151 @@ implemented:
 
 1. **Social URLs** — Facebook, YouTube (and TikTok/Instagram if they exist).
    Fill `siteConfig.social`; empty entries are skipped, not broken.
-2. **Legal name spelling** — see §1.
+2. **Legal name spelling** — see section 1.
 3. **English production copy** — approve or replace our translation.
-4. **Advertising / Training / Social-impact copy** — approve or replace the drafts.
+4. **Service-page support copy** — the deliverables, process stages, and FAQ
+   answers on all sixteen service pages are ours (`supportStatus: "draft"`).
+   The PDF supplies the description of each service, not its terms of
+   engagement, so every claim in these blocks needs confirming: turnaround
+   times, what is handed over, ownership of footage and data, the minimum ad
+   budget on `/social-media/facebook-boosting`, and the certificate wording on
+   `/training/journalism-basics`.
 5. **Team page** — names, roles, photographs.
-6. **Photography and showreel** — the design is text-first because no imagery
-   was supplied. Hero and section bands have room for stills or video.
+6. **Photography and showreel** — no imagery was supplied, so every page shows
+   a generated plate from `public/media/` instead. Replacing one with a real
+   photograph is a one-line content change; adding a film is a `video` object
+   beside the image. Both are documented in
+   [`public/media/README.md`](../public/media/README.md).
 7. **Contact form delivery** — currently a `mailto:` composer. Needs a real
    endpoint if the client wants messages to land in an inbox automatically.
 8. **Office hours** — `siteConfig.hours` is an assumption (Sun–Fri, 10:00–18:00).
    Confirm.
+
+---
+
+## 6. `Service_Portfolio_Overview.pdf` — the scope of work
+
+A three-page PDF, "SERVICE PORTFOLIO & SCOPE OF WORK", subtitled
+"Comprehensive Overview of Production, Social Media Management, Training, and
+R&D Services". English throughout, with the department headings also given in
+Devanagari. It is the source for every page under the four service categories.
+
+Its own footer notes that it was "generated based on service outlines
+provided" — so it is the client's summary of their scope, not a legal
+document. Nothing in it states a price, a turnaround, or a guarantee, which is
+why none of ours claim to come from it.
+
+### Structure
+
+| # | Department (PDF) | Nepali heading (PDF) | Site page |
+| --- | --- | --- | --- |
+| I | Production Work | प्रोडक्सनको काम — भिडियो, फोटो | `/production` |
+| II | Social Media Handling | सोसल मिडिया ह्याण्डलिंग | `/social-media` |
+| III | Training Programs | तालिम तथा क्षमता विकास | `/training` |
+| IV | Research & Development | अनुसन्धान तथा विकास | `/research-development` |
+
+### The sixteen services
+
+| PDF entry | Nepali (PDF) | URL |
+| --- | --- | --- |
+| I.1 Biography | जीवनी | `/production/biography` |
+| I.2 Documentary Film Production | वृत्तचित्र | `/production/documentary` |
+| I.3 Advertisements & Commercials | विज्ञापन | `/production/advertising` |
+| I.4 Profile Making | प्रोफाइल मेकिङ | `/production/profile-making` |
+| II.1 Biography & Profile Creation | — | `/social-media/digital-profile` |
+| II.2 Media Consulting | — | `/social-media/media-consulting` |
+| II.3 Facebook Boosting & Digital Campaigns | — | `/social-media/facebook-boosting` |
+| II.4 Social Media Advertisements | — | `/social-media/social-media-ads` |
+| II.5 Event Coverage & Management | — | `/social-media/event-coverage` |
+| III.1 Social Media Handling & Strategy | — | `/training/social-media-training` |
+| III.2 Content Creation | — | `/training/content-creation` |
+| III.3 Journalism Basics | — | `/training/journalism-basics` |
+| III.4 Creativity & Technical Production | — | `/training/creative-technical` |
+| III.5 Idea Monetization | — | `/training/idea-monetization` |
+| IV.1 Source Research | — | `/research-development/source-research` |
+| IV.2 Government & Non-Government Collaboration | — | `/research-development/government-collaboration` |
+
+Two slugs deliberately do not echo the PDF's wording. `II.1 Biography &
+Profile Creation` became `digital-profile`, because a slug named `biography`
+already exists under Production and describes a different service; and
+`III.1 Social Media Handling & Strategy` became `social-media-training`, to
+keep it distinct from the department of nearly the same name. The page titles
+still read as the PDF writes them.
+
+### Department descriptions, verbatim
+
+> **I. Production Work.** Full-service media production focusing on
+> high-quality visual storytelling, corporate branding, and public messaging
+> through professional photography and videography.
+
+> **II. Social Media Handling.** Strategic digital presence management,
+> branding, audience engagement, and performance marketing across major
+> digital media platforms.
+
+> **III. Training Programs.** Comprehensive capacity building and practical
+> technical training designed for individuals, corporate teams, journalists,
+> and creative professionals.
+
+> **IV. Research & Development (R&D).** In-depth field research, media
+> monitoring, data collection, and multi-sectoral development initiatives in
+> collaboration with key stakeholders.
+
+### Service descriptions, verbatim
+
+Each of these is the first paragraph of the matching page's `body`, in English
+as `portfolio`, and in Nepali as `translated`.
+
+1. **Biography.** In-depth video and photo biographical storytelling for key
+   figures, leaders, dynamic personalities, and historical personal archives.
+   Captures lifetime achievements, personal narratives, and legacy.
+2. **Documentary Film Production.** End-to-end thematic storytelling and
+   documentary film creation covering social issues, cultural heritage,
+   institutional milestones, and development projects.
+3. **Advertisements & Commercials.** High-impact promotional videos, TV
+   commercials (TVCs), digital ad campaigns, and commercial photo shoots
+   tailored for brand awareness and market reach.
+4. **Profile Making.** Professional corporate and organizational profile
+   creation using structured video summaries, photographic showcases, and
+   audio-visual presentations to showcase company identity and capacity.
+5. **Biography & Profile Creation.** Crafting and optimizing personal and
+   organizational digital profiles across channels (Facebook, YouTube,
+   Instagram, LinkedIn), establishing brand identity and authority.
+6. **Media Consulting.** Strategic advice on communication channels, public
+   relations, crisis management, digital positioning, and targeted public
+   outreach strategies.
+7. **Facebook Boosting & Digital Campaigns.** Targeted ad placement, audience
+   demographic segmentation, post boosting, ROI analysis, and paid performance
+   marketing to maximize reach and conversion.
+8. **Social Media Advertisements.** Designing and publishing bespoke visual
+   ads, banner graphics, short promotional reels, and engaging copywriting
+   tailored specifically for digital feeds.
+9. **Event Coverage & Management.** Live digital streaming, real-time social
+   media updates, multimedia publishing, and complete media coordination
+   during public events, conferences, and celebrations.
+10. **Social Media Handling & Strategy.** Practical guidance on page
+    administration, algorithmic optimization, analytics interpretation,
+    content scheduling, and community engagement tactics.
+11. **Content Creation.** Hands-on training in developing compelling visual,
+    written, and video content tailored to modern digital audiences.
+12. **Journalism Basics.** Core fundamentals of news gathering, interviewing
+    techniques, ethical reporting, press release writing, and investigative
+    storytelling.
+13. **Creativity & Technical Production.** Advanced practical skill modules in
+    visual arts and production technology: Videography, Photography, Video
+    Editing, Graphic Design, Motion Graphics.
+14. **Idea Monetization.** Strategies to transform creative projects, YouTube
+    channels, digital content, and media skills into sustainable revenue
+    streams through ad revenue, sponsorships, and affiliate channels.
+15. **Source Research.** In-depth background investigation, primary/secondary
+    data gathering, field study, stakeholder mapping, and policy review for
+    media and development projects.
+16. **Government & Non-Government Collaboration.** Partnering with
+    federal/local government bodies, NGOs, INGOs, and civil society
+    organizations for baseline studies, impact assessment reports, awareness
+    campaigns, and community development initiatives.
+
+### What the PDF does *not* supply
+
+No prices, no timelines, no client list, no past-project names, no team names,
+no photographs, no video. Everything on the service pages beyond the sixteen
+paragraphs above is ours and marked accordingly — see open item 4 in section 5.

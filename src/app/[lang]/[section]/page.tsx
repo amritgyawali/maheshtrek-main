@@ -4,18 +4,37 @@ import PageHeader from "@/components/PageHeader";
 import Band, { BandHeading } from "@/components/Band";
 import Prose from "@/components/Prose";
 import Bullets from "@/components/Bullets";
+import ProcessList from "@/components/ProcessList";
+import Faqs from "@/components/Faqs";
+import ServiceGrid from "@/components/ServiceGrid";
+import MediaFigure from "@/components/MediaFigure";
+import VideoBlock from "@/components/VideoBlock";
 import CtaButton from "@/components/CtaButton";
 import Reveal from "@/components/Reveal";
 import Glow from "@/components/Glow";
-import { allSectionSlugs, getDictionary, getSection } from "@/content";
+import PageJsonLd from "@/components/PageJsonLd";
+import { allSectionSlugs, getDictionary, getSection, servicesInCategory } from "@/content";
 import { isLocale, locales } from "@/lib/i18n";
 import { buildMetadata } from "@/lib/metadata";
+import {
+  breadcrumbList,
+  faqPage,
+  graph,
+  itemList,
+  service as serviceNode,
+  videoObject,
+  webPage,
+  type Crumb,
+} from "@/lib/schema";
 
 /**
- * One renderer for every content section. Pages differ by data, not by code —
- * adding a service page means adding an entry to `src/content/{ne,en}.ts`.
- * `/[lang]/contact` has its own static route and takes precedence over this
- * dynamic segment.
+ * One renderer for every content section, including the four service
+ * categories. Pages differ by data, not by code — adding a section means
+ * adding an entry to `src/content/{ne,en}.ts`, and adding a service under a
+ * category means adding one to `src/content/services.{ne,en}.ts`.
+ *
+ * `/[lang]/contact` and `/[lang]/services` have their own static routes and
+ * take precedence over this dynamic segment.
  */
 export function generateStaticParams() {
   return locales.flatMap((lang) => allSectionSlugs().map((section) => ({ lang, section })));
@@ -34,9 +53,11 @@ export async function generateMetadata({
 
   return buildMetadata({
     lang,
-    title: section.title,
-    description: section.lead,
+    title: section.metaTitle ?? section.title,
+    description: section.metaDescription ?? section.lead,
     path: section.slug,
+    keywords: section.keywords,
+    titleAbsolute: true,
   });
 }
 
@@ -52,7 +73,54 @@ export default async function SectionPage({
   const section = getSection(lang, slug);
   if (!section) notFound();
 
+  const { ui } = dict;
+  const leaves = section.isServiceCategory ? servicesInCategory(lang, section.slug) : [];
   const hasBullets = Boolean(section.bullets && section.bullets.length > 0);
+
+  // A category hangs under the services hub; a company page hangs off the root.
+  const trail: Crumb[] = section.isServiceCategory
+    ? [
+        { name: dict.servicesHub.title, path: "services" },
+        { name: section.navLabel, path: section.slug },
+      ]
+    : [{ name: section.navLabel, path: section.slug }];
+
+  const nodes = graph([
+    webPage({
+      lang,
+      path: section.slug,
+      title: section.metaTitle ?? section.title,
+      description: section.metaDescription ?? section.lead,
+      image: section.media?.image,
+      trail,
+    }),
+    breadcrumbList(lang, dict.siteName, trail),
+    section.isServiceCategory
+      ? serviceNode({
+          lang,
+          path: section.slug,
+          name: section.title,
+          description: section.metaDescription ?? section.lead,
+          serviceType: section.navLabel,
+          image: section.media?.image,
+          offers: leaves.map((leaf) => ({ name: leaf.title, description: leaf.lead })),
+        })
+      : undefined,
+    leaves.length > 0
+      ? itemList(
+          lang,
+          section.slug,
+          section.title,
+          leaves.map((leaf) => ({
+            name: leaf.title,
+            path: `${leaf.category}/${leaf.slug}`,
+            description: leaf.lead,
+          }))
+        )
+      : undefined,
+    section.faqs ? faqPage(lang, section.slug, section.faqs) : undefined,
+    videoObject(section.media?.video),
+  ]);
 
   return (
     <>
@@ -62,6 +130,8 @@ export default async function SectionPage({
         title={section.title}
         lead={section.lead}
         homeLabel={dict.siteName}
+        breadcrumbLabel={ui.breadcrumbLabel}
+        trail={trail}
       />
 
       {/* The lead panel sits beside the capability grid when there is one, and
@@ -75,13 +145,37 @@ export default async function SectionPage({
         >
           <Reveal>
             <div className={`panel panel-lip h-full p-7 md:p-12 ${hasBullets ? "" : "max-w-4xl"}`}>
-              <Prose block={section.body} draftLabel={dict.ui.draftBadge} size="lg" />
+              <Prose block={section.body} draftLabel={ui.draftBadge} size="lg" />
             </div>
           </Reveal>
 
           {hasBullets && <Bullets items={section.bullets ?? []} className="sm:grid-cols-1" />}
         </div>
+
+        {section.media && (
+          <Reveal className="mt-4">
+            <MediaFigure image={section.media.image} />
+          </Reveal>
+        )}
+
+        {section.media?.video && (
+          <Reveal className="mt-4">
+            <VideoBlock video={section.media.video} label={ui.watchLabel} />
+          </Reveal>
+        )}
       </Band>
+
+      {/* Every leaf page in the department, each its own URL. */}
+      {leaves.length > 0 && (
+        <Band ariaLabel={ui.servicesHeading}>
+          <BandHeading
+            eyebrow={ui.servicesHeading}
+            title={section.navLabel}
+            lead={ui.relatedLead}
+          />
+          <ServiceGrid lang={lang} services={leaves} action={ui.readMore} className="mt-12" />
+        </Band>
+      )}
 
       {/* All subsections share one band: a band each would stack two full
           section paddings between every pair of them. */}
@@ -95,7 +189,7 @@ export default async function SectionPage({
                 <div className="grid gap-10 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:gap-16">
                   <BandHeading title={subsection.title} lead={subsection.lead} />
                   <Reveal>
-                    <Prose block={subsection.body} draftLabel={dict.ui.draftBadge} />
+                    <Prose block={subsection.body} draftLabel={ui.draftBadge} />
                     {subsection.bullets && subsection.bullets.length > 0 && (
                       <Bullets items={subsection.bullets} className="mt-8" />
                     )}
@@ -104,6 +198,20 @@ export default async function SectionPage({
               </div>
             ))}
           </div>
+        </Band>
+      )}
+
+      {section.process && section.process.length > 0 && (
+        <Band tone="raised" ariaLabel={ui.processHeading}>
+          <BandHeading title={ui.processHeading} />
+          <ProcessList steps={section.process} className="mt-12" />
+        </Band>
+      )}
+
+      {section.faqs && section.faqs.length > 0 && (
+        <Band ariaLabel={ui.faqHeading}>
+          <BandHeading title={ui.faqHeading} />
+          <Faqs items={section.faqs} className="mt-10 max-w-3xl" />
         </Band>
       )}
 
@@ -125,6 +233,8 @@ export default async function SectionPage({
           </Reveal>
         </Band>
       )}
+
+      <PageJsonLd nodes={nodes} />
     </>
   );
 }

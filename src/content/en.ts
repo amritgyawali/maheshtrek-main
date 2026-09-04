@@ -1,5 +1,6 @@
 import type { Dictionary } from "./types";
 import { siteConfig } from "@/lib/site-config";
+import { servicesEn, servicesHubEn } from "./services.en";
 
 /**
  * English content.
@@ -44,6 +45,15 @@ export const en: Dictionary = {
     companyHeading: "Company",
     servicesHeading: "Services",
     portalTagline: "Our digital news portal",
+    breadcrumbLabel: "Breadcrumb",
+    deliverablesHeading: "What you get",
+    processHeading: "How the work runs",
+    faqHeading: "Frequently asked questions",
+    relatedHeading: "More from this department",
+    relatedLead: "Same team, adjacent work.",
+    allServicesLabel: "All services",
+    watchLabel: "Watch the film",
+    exploreLabel: "Open the page",
   },
 
   home: {
@@ -56,7 +66,7 @@ export const en: Dictionary = {
       href: siteConfig.rightSanchar.url,
       external: true,
     },
-    heroSecondaryCta: { label: "What we do", href: "production" },
+    heroSecondaryCta: { label: "What we do", href: "services" },
     tickerItems: [
       "Right Sanchar",
       "Documentary",
@@ -90,9 +100,9 @@ export const en: Dictionary = {
         text: "Documentary, biography, and corporate video — from research to final edit.",
       },
       {
-        slug: "advertising",
-        title: "Advertising",
-        text: "Creative campaigns that turn a brand message into something worth remembering.",
+        slug: "social-media",
+        title: "Social media handling",
+        text: "Profile creation, consulting, boosting, ad design, and event coverage.",
       },
       {
         slug: "training",
@@ -122,6 +132,23 @@ export const en: Dictionary = {
       eyebrow: "Introduction",
       title: "Najikako Sathi Media Pvt. Ltd.",
       lead: "A multi-dimensional media house advancing information, entertainment, and social responsibility together.",
+      metaTitle: "About — Najikako Sathi Media Pvt. Ltd., Kathmandu",
+      metaDescription:
+        "Najikako Sathi Media Pvt. Ltd. is a multi-dimensional media house in Anamnagar, Kathmandu: the Right Sanchar news portal, documentary and biography production, advertising, social media handling, and media training.",
+      keywords: [
+        "Najikako Sathi Media",
+        "media company Kathmandu",
+        "media house Nepal",
+        "Anamnagar media",
+      ],
+      media: {
+        image: {
+          src: "/media/sections/about.svg",
+          alt: "Najikako Sathi Media Pvt. Ltd. — company introduction",
+          width: 1200,
+          height: 675,
+        },
+      },
       inPrimaryNav: true,
       group: "company",
       body: {
@@ -145,6 +172,23 @@ export const en: Dictionary = {
       eyebrow: "Media",
       title: "Right Sanchar",
       lead: "The digital news portal operated by Najikako Sathi Media Pvt. Ltd.",
+      metaTitle: "Right Sanchar — Digital News Portal by Najikako Sathi",
+      metaDescription:
+        "Right Sanchar publishes fact-based news, commentary, and investigative work on politics, society, economy, culture, and public interest issues. Operated by Najikako Sathi Media Pvt. Ltd., Kathmandu.",
+      keywords: [
+        "Right Sanchar",
+        "Nepali news portal",
+        "investigative journalism Nepal",
+        "rightsanchar",
+      ],
+      media: {
+        image: {
+          src: "/media/sections/right-sanchar.svg",
+          alt: "Right Sanchar — digital news portal",
+          width: 1200,
+          height: 675,
+        },
+      },
       inPrimaryNav: true,
       group: "company",
       body: {
@@ -172,8 +216,27 @@ export const en: Dictionary = {
       eyebrow: "Production",
       title: "From idea to screen",
       lead: "The unit that turns ideas, stories, and messages into living images.",
+      metaTitle: "Production — Biography, Documentary, Advertising & Profiles",
+      metaDescription:
+        "Full-service media production focused on high-quality visual storytelling, corporate branding, and public messaging: biography films, documentaries, advertisements and commercials, and corporate profile making.",
+      keywords: [
+        "production house Kathmandu",
+        "video production Nepal",
+        "documentary production",
+        "biography video Nepal",
+        "TVC production",
+      ],
+      media: {
+        image: {
+          src: "/media/sections/production.svg",
+          alt: "Production department — Najikako Sathi Media",
+          width: 1200,
+          height: 675,
+        },
+      },
       inPrimaryNav: true,
       group: "services",
+      isServiceCategory: true,
       body: {
         status: "translated",
         paragraphs: [
@@ -181,56 +244,7 @@ export const en: Dictionary = {
           "Our focus stays on deep study of the subject, excellent storytelling, and quality picture and sound editing. From biographies that surface the story behind a person or an institution to commercial advertising that builds a brand and public-awareness videos, we are committed to visual work that moves the viewer and leaves a lasting mark.",
         ],
       },
-      subsections: [
-        {
-          id: "biography",
-          title: "Biography",
-          lead: "Cinematic biography films that bring a life to the screen.",
-          body: {
-            status: "doc",
-            paragraphs: [
-              "We bring lives to the screen by crafting compelling, cinematic biography videos that turn personal stories, family legacies, corporate histories, and historical journeys into unforgettable visual experiences.",
-            ],
-          },
-        },
-        {
-          id: "documentary",
-          title: "Documentary",
-          lead: "Real life and truth, brought to the screen.",
-          body: {
-            status: "doc",
-            paragraphs: [
-              "We bring real life and truth to the screen. We craft compelling, impactful documentaries that cover everything from personal journeys and social issues to corporate histories and historical events.",
-              "Whether you want to shed light on an important social topic, document the growth of your organization or community, or share an inspiring true story with the world, we handle every stage of the process with complete professionalism. From thorough research and scriptwriting to cinematography and cinematic editing, we ensure every documentary is engaging, authentic, and deeply moving.",
-            ],
-          },
-        },
-      ],
       cta: { label: "Discuss a project", href: "contact" },
-    },
-
-    {
-      slug: "advertising",
-      navLabel: "Advertising",
-      eyebrow: "Service",
-      title: "Advertising",
-      lead: "Creative campaigns that turn a brand message into something worth remembering.",
-      inPrimaryNav: true,
-      group: "services",
-      body: {
-        status: "draft",
-        paragraphs: [
-          "Najikako Sathi Media builds advertising for television, digital, and social platforms. Concept, script, shoot, edit, and delivery are handled in one place, by one team.",
-          "Every campaign starts with the market. Who the audience is, what the message has to say, and how the brand should sound — get those three right and short-form work leaves a long impression.",
-        ],
-      },
-      bullets: [
-        { title: "TV commercials", text: "Broadcast-grade TVCs, from concept to final master." },
-        { title: "Digital campaigns", text: "Short, targeted cuts built for social feeds." },
-        { title: "Corporate films", text: "Company profiles and product promotion videos." },
-        { title: "Radio jingles", text: "Audio writing, recording, and mixing." },
-      ],
-      cta: { label: "Request a proposal", href: "contact" },
     },
 
     {
@@ -239,8 +253,27 @@ export const en: Dictionary = {
       eyebrow: "Service",
       title: "Media & skill development training",
       lead: "Hands-on programs in journalism, video production, and digital content.",
+      metaTitle: "Media & Skill Development Training in Kathmandu, Nepal",
+      metaDescription:
+        "Capacity building and practical technical training for individuals, corporate teams, journalists, and creative professionals: social media strategy, content creation, journalism basics, technical production, and monetisation.",
+      keywords: [
+        "media training Nepal",
+        "journalism training Kathmandu",
+        "videography course Nepal",
+        "social media training",
+        "skill development Kathmandu",
+      ],
+      media: {
+        image: {
+          src: "/media/sections/training.svg",
+          alt: "Media and skill development training — Najikako Sathi Media",
+          width: 1200,
+          height: 675,
+        },
+      },
       inPrimaryNav: true,
       group: "services",
+      isServiceCategory: true,
       body: {
         status: "draft",
         paragraphs: [
@@ -248,13 +281,83 @@ export const en: Dictionary = {
           "Separate tracks run for students, early-career journalists, in-house communication teams, and entrepreneurs. On request, training can be delivered at your own office.",
         ],
       },
-      bullets: [
-        { title: "Journalism basics", text: "News writing, source verification, and media ethics." },
-        { title: "Mobile journalism", text: "Reporting, shooting, and editing from a phone." },
-        { title: "Video production", text: "Camera, lighting, sound, and editing in practice." },
-        { title: "Digital content", text: "Storytelling and distribution strategy for social platforms." },
-      ],
       cta: { label: "Ask about training", href: "contact" },
+    },
+
+    {
+      slug: "social-media",
+      navLabel: "Social media",
+      eyebrow: "Social media",
+      title: "Social media handling",
+      lead:
+        "Strategic digital presence, branding, audience engagement, and performance marketing.",
+      metaTitle: "Social Media Handling & Management in Kathmandu, Nepal",
+      metaDescription:
+        "Strategic digital presence management, branding, audience engagement, and performance marketing across major platforms: profile creation, media consulting, boosting and campaigns, ad design, and event coverage.",
+      keywords: [
+        "social media management Nepal",
+        "digital marketing Kathmandu",
+        "Facebook boosting Nepal",
+        "media consulting",
+        "event coverage Nepal",
+      ],
+      media: {
+        image: {
+          src: "/media/sections/social-media.svg",
+          alt: "Social media handling — Najikako Sathi Media",
+          width: 1200,
+          height: 675,
+        },
+      },
+      inPrimaryNav: false,
+      group: "services",
+      isServiceCategory: true,
+      body: {
+        status: "portfolio",
+        paragraphs: [
+          "Strategic digital presence management, branding, audience engagement, and performance marketing across major digital media platforms.",
+          "Opening a page is easy; keeping it credible is not. From the groundwork of a profile through the month's content, the paid campaigns, and live coverage of an event, all five services are run by one team — which is why the voice stays the same across them.",
+        ],
+      },
+      cta: { label: "Discuss our digital presence", href: "contact" },
+    },
+
+    {
+      slug: "research-development",
+      navLabel: "Research & development",
+      eyebrow: "Research & development",
+      title: "Research & development",
+      lead:
+        "Field research, media monitoring, data collection, and multi-sectoral development work.",
+      metaTitle: "Research & Development — Field Studies and Collaboration",
+      metaDescription:
+        "In-depth field research, media monitoring, data collection, and multi-sectoral development initiatives in collaboration with key stakeholders: source research and government and non-government collaboration.",
+      keywords: [
+        "research services Nepal",
+        "baseline study Nepal",
+        "impact assessment",
+        "media monitoring Nepal",
+        "development collaboration",
+      ],
+      media: {
+        image: {
+          src: "/media/sections/research-development.svg",
+          alt: "Research and development — Najikako Sathi Media",
+          width: 1200,
+          height: 675,
+        },
+      },
+      inPrimaryNav: false,
+      group: "services",
+      isServiceCategory: true,
+      body: {
+        status: "portfolio",
+        paragraphs: [
+          "In-depth field research, media monitoring, data collection, and multi-sectoral development initiatives in collaboration with key stakeholders.",
+          "Research is not a separate department here so much as the floor everything else stands on. The same fieldwork supports a funder's report and a documentary, which is why a study and a film are usually commissioned together.",
+        ],
+      },
+      cta: { label: "Discuss a study", href: "contact" },
     },
 
     {
@@ -263,6 +366,10 @@ export const en: Dictionary = {
       eyebrow: "Social responsibility",
       title: "Work aimed at transforming communities",
       lead: "Alongside commercial media services, we stay actively engaged in social initiatives.",
+      metaTitle: "Social Initiatives — Work Aimed at Transforming Communities",
+      metaDescription:
+        "Awareness content, community partnerships, and communication support on issues of public concern — the social responsibility side of Najikako Sathi Media Pvt. Ltd.",
+      keywords: ["social initiatives Nepal", "awareness campaign", "community media"],
       inPrimaryNav: false,
       group: "company",
       body: {
@@ -281,6 +388,10 @@ export const en: Dictionary = {
       eyebrow: "Team",
       title: "Our team",
       lead: "Every piece of work comes out of one creative team and its equipment.",
+      metaTitle: "Our Team — Editorial, Camera, Edit, and Production",
+      metaDescription:
+        "Editorial, camera, edit, and production management — the four desks behind every project at Najikako Sathi Media Pvt. Ltd., Kathmandu.",
+      keywords: ["Najikako Sathi Media team", "media team Kathmandu"],
       inPrimaryNav: false,
       group: "company",
       body: {
@@ -299,6 +410,10 @@ export const en: Dictionary = {
       eyebrow: "Careers",
       title: "Work with us",
       lead: "Open door for people serious about journalism and visual production.",
+      metaTitle: "Careers — Work With Najikako Sathi Media",
+      metaDescription:
+        "Openings and open applications for reporters, camera operators, video editors, and content writers at Najikako Sathi Media Pvt. Ltd., Anamnagar, Kathmandu.",
+      keywords: ["media jobs Nepal", "journalist vacancy Kathmandu", "video editor job Nepal"],
       inPrimaryNav: false,
       group: "company",
       body: {
@@ -311,6 +426,9 @@ export const en: Dictionary = {
       cta: { label: "Send an application", href: "contact" },
     },
   ],
+
+  services: servicesEn,
+  servicesHub: servicesHubEn,
 
   contact: {
     eyebrow: "Contact",

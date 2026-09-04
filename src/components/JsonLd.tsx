@@ -49,7 +49,12 @@ export default function JsonLd({ lang, dict }: { lang: Locale; dict: Dictionary 
         "Documentary production",
         "Biography films",
         "Advertising production",
+        "Corporate profile production",
+        "Social media management",
+        "Media consulting",
+        "Event coverage and live streaming",
         "Media training",
+        "Field research and impact assessment",
       ],
     },
     {
@@ -62,23 +67,37 @@ export default function JsonLd({ lang, dict }: { lang: Locale; dict: Dictionary 
     },
     {
       "@type": "Service",
-      name: dict.home.whatWeDoHeading,
+      name: dict.servicesHub.title,
+      url: `${siteConfig.url}${href(lang, "services")}`,
       provider: { "@id": organizationId },
       areaServed: siteConfig.address.countryName,
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: dict.home.whatWeDoHeading,
-        itemListElement: dict.sections
-          .filter((section) => ["production", "advertising", "training"].includes(section.slug))
-          .map((section) => ({
+        // Every department and every leaf service, so the catalogue matches
+        // what the site actually publishes rather than a hand-kept subset.
+        itemListElement: [
+          ...dict.sections
+            .filter((section) => section.isServiceCategory)
+            .map((section) => ({
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: section.title,
+                description: section.lead,
+                url: `${siteConfig.url}${href(lang, section.slug)}`,
+              },
+            })),
+          ...dict.services.map((service) => ({
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: section.title,
-              description: section.lead,
-              url: `${siteConfig.url}${href(lang, section.slug)}`,
+              name: service.title,
+              description: service.lead,
+              url: `${siteConfig.url}${href(lang, `${service.category}/${service.slug}`)}`,
             },
           })),
+        ],
       },
     },
   ];

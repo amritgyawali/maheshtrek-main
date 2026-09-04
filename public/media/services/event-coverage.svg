@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img">
+  <defs>
+    <radialGradient id="a" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF3B4F" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#FF3B4F" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="i" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7A6BFF" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#7A6BFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="s" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF3B4F"/>
+      <stop offset="100%" stop-color="#7A6BFF"/>
+    </linearGradient>
+    <pattern id="g" width="72" height="72" patternUnits="userSpaceOnUse">
+      <path d="M72 0H0v72" fill="none" stroke="rgba(255,255,255,0.045)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="675" fill="#08090C"/>
+  <rect width="1200" height="675" fill="url(#g)"/>
+  <circle cx="155.67" cy="176.14" r="420" fill="url(#a)"/>
+  <circle cx="1106.6" cy="586.93" r="380" fill="url(#i)"/>
+  <path d="M600 338 L963.36 343.11" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+  <path d="M600 338 L771.57 443.66" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+  <path d="M600 338 L797.6 639.02" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+  <path d="M600 338 L477.73 534.37" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+  <path d="M600 338 L310.06 525.72" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+  <path d="M600 338 L250.9 323.69" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+  <path d="M600 338 L168.92 178.85" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+  <path d="M600 338 L389.31 170.81" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+  <path d="M600 338 L551.42 78.77" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+  <path d="M600 338 L808.27 145.06" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+  <path d="M600 338 L1037.07 259.66" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+  <circle cx="963.36" cy="343.11" r="7.02" fill="#7A6BFF"/>
+  <circle cx="771.57" cy="443.66" r="13.3" fill="rgba(255,255,255,0.22)"/>
+  <circle cx="797.6" cy="639.02" r="13.67" fill="rgba(255,255,255,0.22)"/>
+  <circle cx="477.73" cy="534.37" r="12.51" fill="rgba(255,255,255,0.22)"/>
+  <circle cx="310.06" cy="525.72" r="12.02" fill="#7A6BFF"/>
+  <circle cx="250.9" cy="323.69" r="11.59" fill="rgba(255,255,255,0.22)"/>
+  <circle cx="168.92" cy="178.85" r="6.08" fill="rgba(255,255,255,0.22)"/>
+  <circle cx="389.31" cy="170.81" r="7.27" fill="rgba(255,255,255,0.22)"/>
+  <circle cx="551.42" cy="78.77" r="9.61" fill="#7A6BFF"/>
+  <circle cx="808.27" cy="145.06" r="9.28" fill="rgba(255,255,255,0.22)"/>
+  <circle cx="1037.07" cy="259.66" r="9.34" fill="rgba(255,255,255,0.22)"/>
+  <circle cx="600" cy="338" r="34" fill="url(#s)"/>
+  <circle cx="600" cy="338" r="62" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="2"/>
+  <rect x="0.5" y="0.5" width="1199" height="674" fill="none" stroke="rgba(255,255,255,0.09)"/>
+</svg>

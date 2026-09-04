@@ -4,6 +4,7 @@ import SocialIcon from "./SocialIcon";
 import Glow from "./Glow";
 import { href, type Locale } from "@/lib/i18n";
 import { activeSocialLinks, siteConfig } from "@/lib/site-config";
+import { serviceCategories, servicesInCategory } from "@/content";
 import type { Dictionary, Section } from "@/content/types";
 
 interface FooterProps {
@@ -50,6 +51,7 @@ export default function Footer({ lang, dict }: FooterProps) {
 
   const company = dict.sections.filter((section) => section.group === "company");
   const services = dict.sections.filter((section) => section.group === "services");
+  const categories = serviceCategories(lang);
 
   return (
     <footer className="relative isolate mt-auto overflow-hidden border-t border-white/[0.07] bg-panel">
@@ -140,6 +142,35 @@ export default function Footer({ lang, dict }: FooterProps) {
           >
             {dict.ui.contactHeading}
           </Link>
+        </div>
+      </div>
+
+      <div className="relative border-t border-white/[0.07]">
+        <div className="container-page grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
+          {categories.map((category) => (
+            <nav key={category.slug} aria-label={category.navLabel}>
+              <h2 className="label">
+                <Link
+                  href={href(lang, category.slug)}
+                  className="transition-colors hover:text-content"
+                >
+                  {category.navLabel}
+                </Link>
+              </h2>
+              <ul className="mt-5 space-y-1">
+                {servicesInCategory(lang, category.slug).map((service) => (
+                  <li key={service.slug}>
+                    <Link
+                      href={href(lang, `${category.slug}/${service.slug}`)}
+                      className="-mx-2 inline-block rounded-lg px-2 py-1.5 text-body-sm text-content-dim transition-colors hover:bg-white/[0.05] hover:text-content"
+                    >
+                      {service.navLabel}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
         </div>
       </div>
 
