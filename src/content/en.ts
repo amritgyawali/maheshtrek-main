@@ -54,6 +54,7 @@ export const en: Dictionary = {
     allServicesLabel: "All services",
     watchLabel: "Watch the film",
     exploreLabel: "Open the page",
+    startConversation: "Start a conversation",
   },
 
   home: {
@@ -128,7 +129,7 @@ export const en: Dictionary = {
   sections: [
     {
       slug: "about",
-      navLabel: "About",
+      navLabel: "About Us",
       eyebrow: "Introduction",
       title: "Najikako Sathi Media Pvt. Ltd.",
       lead: "A multi-dimensional media house advancing information, entertainment, and social responsibility together.",
@@ -166,49 +167,6 @@ export const en: Dictionary = {
       cta: { label: "Contact us", href: "contact" },
     },
 
-    {
-      slug: "right-sanchar",
-      navLabel: "Right Sanchar",
-      eyebrow: "Media",
-      title: "Right Sanchar",
-      lead: "The digital news portal operated by Najikako Sathi Media Pvt. Ltd.",
-      metaTitle: "Right Sanchar — Digital News Portal by Najikako Sathi",
-      metaDescription:
-        "Right Sanchar publishes fact-based news, commentary, and investigative work on politics, society, economy, culture, and public interest issues. Operated by Najikako Sathi Media Pvt. Ltd., Kathmandu.",
-      keywords: [
-        "Right Sanchar",
-        "Nepali news portal",
-        "investigative journalism Nepal",
-        "rightsanchar",
-      ],
-      media: {
-        image: {
-          src: "/media/sections/right-sanchar.svg",
-          alt: "Right Sanchar — digital news portal",
-          width: 1200,
-          height: 675,
-        },
-      },
-      inPrimaryNav: true,
-      group: "company",
-      body: {
-        status: "doc",
-        paragraphs: [
-          "Right Sanchar is a digital media portal operated by Najikako Sathi Media Pvt. Ltd. dedicated to delivering accurate, truthful, and unbiased information to the public. We are committed on sharing fact based news, insightful commentary, and investigative content on contemporary politics, society, economy, culture, and issues that matter to the public.",
-          "Amid a flood of misleading and sponsored news, our core mission is simple: the right information, at the right time, with the right perspective. Prioritizing the voice of the people, Right Sanchar remains continuously active in driving positive change and raising awareness across society.",
-        ],
-      },
-      bullets: [
-        { title: "Politics and society", text: "Fact-based analysis of contemporary events." },
-        { title: "Economy", text: "Markets, policy, and the issues that reach household budgets." },
-        { title: "Investigative work", text: "Evidence-led reporting, not recycled press releases." },
-      ],
-      cta: {
-        label: siteConfig.rightSanchar.display,
-        href: siteConfig.rightSanchar.url,
-        external: true,
-      },
-    },
 
     {
       slug: "production",
@@ -282,6 +240,50 @@ export const en: Dictionary = {
         ],
       },
       cta: { label: "Ask about training", href: "contact" },
+    },
+
+    {
+      slug: "right-sanchar",
+      navLabel: "Right Sanchar",
+      eyebrow: "Media",
+      title: "Right Sanchar",
+      lead: "The digital news portal operated by Najikako Sathi Media Pvt. Ltd.",
+      metaTitle: "Right Sanchar — Digital News Portal by Najikako Sathi",
+      metaDescription:
+        "Right Sanchar publishes fact-based news, commentary, and investigative work on politics, society, economy, culture, and public interest issues. Operated by Najikako Sathi Media Pvt. Ltd., Kathmandu.",
+      keywords: [
+        "Right Sanchar",
+        "Nepali news portal",
+        "investigative journalism Nepal",
+        "rightsanchar",
+      ],
+      media: {
+        image: {
+          src: "/media/sections/right-sanchar.svg",
+          alt: "Right Sanchar — digital news portal",
+          width: 1200,
+          height: 675,
+        },
+      },
+      inPrimaryNav: true,
+      group: "company",
+      body: {
+        status: "doc",
+        paragraphs: [
+          "Right Sanchar is a digital media portal operated by Najikako Sathi Media Pvt. Ltd. dedicated to delivering accurate, truthful, and unbiased information to the public. We are committed on sharing fact based news, insightful commentary, and investigative content on contemporary politics, society, economy, culture, and issues that matter to the public.",
+          "Amid a flood of misleading and sponsored news, our core mission is simple: the right information, at the right time, with the right perspective. Prioritizing the voice of the people, Right Sanchar remains continuously active in driving positive change and raising awareness across society.",
+        ],
+      },
+      bullets: [
+        { title: "Politics and society", text: "Fact-based analysis of contemporary events." },
+        { title: "Economy", text: "Markets, policy, and the issues that reach household budgets." },
+        { title: "Investigative work", text: "Evidence-led reporting, not recycled press releases." },
+      ],
+      cta: {
+        label: siteConfig.rightSanchar.display,
+        href: siteConfig.rightSanchar.url,
+        external: true,
+      },
     },
 
     {

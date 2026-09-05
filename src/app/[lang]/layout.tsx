@@ -98,16 +98,17 @@ export default async function LocaleLayout({
             services: dict.ui.servicesHeading,
             allServices: dict.ui.allServicesLabel,
             overview: dict.ui.exploreLabel,
+            startConversation: dict.ui.startConversation,
           }}
-          // Categories are reached through the services menu, so listing them
-          // again as flat links would put the same page in the bar twice.
-          items={dict.sections
-            .filter((section) => !section.isServiceCategory)
-            .map((section) => ({
-              slug: section.slug,
-              label: section.navLabel,
-              primary: section.inPrimaryNav,
-            }))}
+          // Every section, in dictionary order. The header decides what goes
+          // in the bar (`primary`) and what the phone menu shows as a
+          // department accordion instead of a flat link (`isCategory`).
+          items={dict.sections.map((section) => ({
+            slug: section.slug,
+            label: section.navLabel,
+            primary: section.inPrimaryNav,
+            isCategory: Boolean(section.isServiceCategory),
+          }))}
           serviceCategories={serviceCategories(locale).map((category) => ({
             slug: category.slug,
             label: category.navLabel,

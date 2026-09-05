@@ -258,6 +258,8 @@ export interface Ui {
   allServicesLabel: string;
   watchLabel: string;
   exploreLabel: string;
+  /** Label on the header's call-to-action button. Points at /contact. */
+  startConversation: string;
 }
 
 export interface Dictionary {

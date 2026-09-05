@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import Logo from "./Logo";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { href, type Locale } from "@/lib/i18n";
@@ -10,7 +10,14 @@ import { href, type Locale } from "@/lib/i18n";
 export interface HeaderNavItem {
   slug: string;
   label: string;
+  /** Show in the desktop bar. */
   primary: boolean;
+  /**
+   * A service department. It still appears in the bar when `primary`, but the
+   * phone menu lists it as an accordion of its leaf pages rather than as a
+   * flat link, so the same page is never in that menu twice.
+   */
+  isCategory: boolean;
 }
 
 export interface HeaderServiceCategory {
@@ -18,6 +25,13 @@ export interface HeaderServiceCategory {
   label: string;
   services: Array<{ slug: string; label: string }>;
 }
+
+/**
+ * The services menu opens directly after this nav item, which is what puts
+ * "Services" second in the bar without the dictionaries having to carry a
+ * separate ordering field.
+ */
+const SERVICES_MENU_AFTER = "about";
 
 interface HeaderProps {
   lang: Locale;
@@ -36,6 +50,7 @@ interface HeaderProps {
     services: string;
     allServices: string;
     overview: string;
+    startConversation: string;
   };
   items: HeaderNavItem[];
   /** The four service categories and their leaf pages, for the services menu. */
@@ -56,6 +71,9 @@ export default function Header({
   const servicesRef = useRef<HTMLDivElement>(null);
 
   const primary = items.filter((item) => item.primary);
+  // Departments are accordions further down the phone menu; listing them flat
+  // as well would put Production and Training in it twice.
+  const flat = items.filter((item) => !item.isCategory);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -105,8 +123,80 @@ export default function Header({
   const isActive = (slug: string) =>
     pathname === href(lang, slug) || pathname.startsWith(`${href(lang, slug)}/`);
 
+  const linkClass = (active: boolean) =>
+    `py-1 text-body-sm transition-colors ${
+      active ? "text-content" : "text-content-dim hover:text-content"
+    }`;
+
   const servicesActive =
     isActive("services") || serviceCategories.some((category) => isActive(category.slug));
+
+  // Sixteen service pages will not fit in a row, so the department they belong
+  // to is the menu and the pages are its contents. The hub itself is a page as
+  // well, linked at the foot of the panel.
+  const servicesMenu = (
+    <div ref={servicesRef} className="relative">
+      <button
+        type="button"
+        onClick={() => setServicesOpen((value) => !value)}
+        aria-expanded={servicesOpen}
+        aria-controls="services-menu"
+        className={`flex items-center gap-2 ${linkClass(servicesActive || servicesOpen)}`}
+      >
+        {labels.services}
+        <span
+          aria-hidden="true"
+          className={`text-caption transition-transform duration-200 ${
+            servicesOpen ? "rotate-180" : ""
+          }`}
+        >
+          ▾
+        </span>
+      </button>
+
+      {servicesOpen && (
+        <div
+          id="services-menu"
+          className="panel panel-lip absolute left-1/2 top-[calc(100%+18px)] w-[min(88vw,940px)] -translate-x-1/2 p-7"
+        >
+          <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-4">
+            {serviceCategories.map((category) => (
+              <div key={category.slug}>
+                <Link
+                  href={href(lang, category.slug)}
+                  onClick={closeAll}
+                  className="font-display text-title-sm text-content transition-colors hover:text-accent-text"
+                >
+                  {category.label}
+                </Link>
+                <ul className="mt-3 space-y-0.5">
+                  {category.services.map((service) => (
+                    <li key={service.slug}>
+                      <Link
+                        href={href(lang, `${category.slug}/${service.slug}`)}
+                        onClick={closeAll}
+                        className="-mx-2 block rounded-lg px-2 py-1.5 text-body-sm text-content-dim transition-colors hover:bg-white/[0.05] hover:text-content"
+                      >
+                        {service.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <Link
+            href={href(lang, "services")}
+            onClick={closeAll}
+            className="mt-7 inline-flex items-center gap-2 border-t border-white/[0.08] pt-5 font-mono text-caption uppercase tracking-widest text-content-faint transition-colors hover:text-accent-text"
+          >
+            {labels.allServices}
+          </Link>
+        </div>
+      )}
+    </div>
+  );
 
   return (
     <header
@@ -121,90 +211,32 @@ export default function Header({
           <Logo lang={lang} />
         </Link>
 
-        <nav aria-label={labels.nav} className="hidden items-center gap-7 lg:flex">
-          {primary.map((item) => {
-            const active = isActive(item.slug);
-            return (
+        {/* Six links plus a button do not fit at 1024px, least of all set in
+            Devanagari, so the bar appears at xl and the phone menu covers the
+            range below it. */}
+        <nav aria-label={labels.nav} className="hidden items-center gap-6 xl:flex">
+          {primary.map((item) => (
+            <Fragment key={item.slug}>
               <Link
-                key={item.slug}
                 href={href(lang, item.slug)}
-                aria-current={active ? "page" : undefined}
-                className={`py-1 text-body-sm transition-colors ${
-                  active ? "text-content" : "text-content-dim hover:text-content"
-                }`}
+                aria-current={isActive(item.slug) ? "page" : undefined}
+                className={linkClass(isActive(item.slug))}
               >
                 {item.label}
               </Link>
-            );
-          })}
+              {item.slug === SERVICES_MENU_AFTER && servicesMenu}
+            </Fragment>
+          ))}
 
-          {/* Sixteen service pages will not fit in a row, so the department
-              they belong to is the menu and the pages are its contents. */}
-          <div ref={servicesRef} className="relative">
-            <button
-              type="button"
-              onClick={() => setServicesOpen((value) => !value)}
-              aria-expanded={servicesOpen}
-              aria-controls="services-menu"
-              className={`flex items-center gap-2 py-1 text-body-sm transition-colors ${
-                servicesActive || servicesOpen
-                  ? "text-content"
-                  : "text-content-dim hover:text-content"
-              }`}
-            >
-              {labels.services}
-              <span
-                aria-hidden="true"
-                className={`text-caption transition-transform duration-200 ${
-                  servicesOpen ? "rotate-180" : ""
-                }`}
-              >
-                ▾
-              </span>
-            </button>
-
-            {servicesOpen && (
-              <div
-                id="services-menu"
-                className="panel panel-lip absolute left-1/2 top-[calc(100%+18px)] w-[min(88vw,940px)] -translate-x-1/2 p-7"
-              >
-                <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-4">
-                  {serviceCategories.map((category) => (
-                    <div key={category.slug}>
-                      <Link
-                        href={href(lang, category.slug)}
-                        onClick={closeAll}
-                        className="font-display text-title-sm text-content transition-colors hover:text-accent-text"
-                      >
-                        {category.label}
-                      </Link>
-                      <ul className="mt-3 space-y-0.5">
-                        {category.services.map((service) => (
-                          <li key={service.slug}>
-                            <Link
-                              href={href(lang, `${category.slug}/${service.slug}`)}
-                              onClick={closeAll}
-                              className="-mx-2 block rounded-lg px-2 py-1.5 text-body-sm text-content-dim transition-colors hover:bg-white/[0.05] hover:text-content"
-                            >
-                              {service.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-
-                <Link
-                  href={href(lang, "services")}
-                  onClick={closeAll}
-                  className="mt-7 inline-flex items-center gap-2 border-t border-white/[0.08] pt-5 font-mono text-caption uppercase tracking-widest text-content-faint transition-colors hover:text-accent-text"
-                >
-                  {labels.allServices}
-                </Link>
-              </div>
-            )}
-          </div>
+          {/* Contact is a link as well as the button: a page in the bar should
+              be reachable the same way every other page in it is. */}
+          <Link
+            href={href(lang, "contact")}
+            aria-current={isActive("contact") ? "page" : undefined}
+            className={linkClass(isActive("contact"))}
+          >
+            {labels.contact}
+          </Link>
         </nav>
 
         <div className="flex items-center gap-3">
@@ -217,7 +249,7 @@ export default function Header({
             href={href(lang, "contact")}
             className="hidden rounded-full bg-accent px-5 py-3 text-body-sm font-medium text-canvas transition-colors hover:bg-[#FF5566] md:inline-flex"
           >
-            {labels.contact}
+            {labels.startConversation}
           </Link>
           <button
             type="button"
@@ -225,7 +257,7 @@ export default function Header({
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? labels.close : labels.menu}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/[0.14] bg-white/[0.04] text-content transition-colors hover:bg-white/[0.08] lg:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/[0.14] bg-white/[0.04] text-content transition-colors hover:bg-white/[0.08] xl:hidden"
           >
             <span className="relative block h-4 w-5" aria-hidden="true">
               <span
@@ -251,25 +283,33 @@ export default function Header({
       {open && (
         <div
           id="mobile-nav"
-          className="max-h-[calc(100vh-76px)] overflow-y-auto border-t border-white/[0.07] bg-canvas lg:hidden"
+          className="max-h-[calc(100vh-76px)] overflow-y-auto border-t border-white/[0.07] bg-canvas xl:hidden"
         >
           <nav aria-label={labels.nav} className="container-page flex flex-col pb-8 pt-2">
-            {items.map((item) => {
-              const active = isActive(item.slug);
-              return (
-                <Link
-                  key={item.slug}
-                  href={href(lang, item.slug)}
-                  onClick={closeAll}
-                  aria-current={active ? "page" : undefined}
-                  className={`border-b border-white/[0.07] py-4 text-body-md transition-colors ${
-                    active ? "text-accent-text" : "text-content hover:text-accent-text"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
+            {flat.map((item) => (
+              <Link
+                key={item.slug}
+                href={href(lang, item.slug)}
+                onClick={closeAll}
+                aria-current={isActive(item.slug) ? "page" : undefined}
+                className={`border-b border-white/[0.07] py-4 text-body-md transition-colors ${
+                  isActive(item.slug) ? "text-accent-text" : "text-content hover:text-accent-text"
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+
+            <Link
+              href={href(lang, "services")}
+              onClick={closeAll}
+              aria-current={isActive("services") ? "page" : undefined}
+              className={`border-b border-white/[0.07] py-4 text-body-md transition-colors ${
+                isActive("services") ? "text-accent-text" : "text-content hover:text-accent-text"
+              }`}
+            >
+              {labels.services}
+            </Link>
 
             {/* Every leaf page is reachable here too: a menu that hides half
                 the site behind a hover is no menu on a phone. */}
@@ -304,11 +344,14 @@ export default function Header({
             ))}
 
             <Link
-              href={href(lang, "services")}
+              href={href(lang, "contact")}
               onClick={closeAll}
-              className="border-b border-white/[0.07] py-4 text-body-md text-content"
+              aria-current={isActive("contact") ? "page" : undefined}
+              className={`border-b border-white/[0.07] py-4 text-body-md transition-colors ${
+                isActive("contact") ? "text-accent-text" : "text-content hover:text-accent-text"
+              }`}
             >
-              {labels.allServices}
+              {labels.contact}
             </Link>
 
             <Link
@@ -316,7 +359,7 @@ export default function Header({
               onClick={closeAll}
               className="mt-6 rounded-full bg-accent px-5 py-3.5 text-center text-body-sm font-medium text-canvas"
             >
-              {labels.contact}
+              {labels.startConversation}
             </Link>
             <LanguageSwitcher
               current={lang}
